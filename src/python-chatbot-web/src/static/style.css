@@ -1,0 +1,96 @@
+body {
+    font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+    background: linear-gradient(135deg, #f8f6f2 0%, #e0c9a6 100%);
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #7c5c27;
+    font-family: 'Noto Serif JP', 'Yu Mincho', serif;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255,255,255,0.95);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 0 24px rgba(124, 92, 39, 0.15);
+    border: 2px solid #e5d3b3;
+}
+
+#chatbox {
+    background: repeating-linear-gradient(
+        135deg,
+        #f5e9d4,
+        #f5e9d4 20px,
+        #e5d3b3 20px,
+        #e5d3b3 40px
+    );
+    border-radius: 8px;
+    padding: 16px;
+    min-height: 200px;
+    margin-bottom: 16px;
+    border: 1px solid #e5d3b3;
+}
+
+#messages {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.user-message {
+    background: #fffbe6;
+    color: #7c5c27;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+    text-align: right;
+    font-family: 'Noto Serif JP', serif;
+    border: 1px solid #e5d3b3;
+}
+
+.bot-message {
+    background: #e5d3b3;
+    color: #3e2c0a;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+    text-align: left;
+    font-family: 'Noto Serif JP', serif;
+    border: 1px solid #c2b280;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #e5d3b3;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Noto Serif JP', serif;
+    background: #f8f6f2;
+}
+
+#send-button {
+    padding: 10px 20px;
+    border: none;
+    background: linear-gradient(90deg, #bfa76f 0%, #e5d3b3 100%);
+    color: #3e2c0a;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+    font-family: 'Noto Serif JP', serif;
+    box-shadow: 0 2px 8px rgba(124, 92, 39, 0.08);
+    transition: background 0.2s;
+}
+
+#send-button:hover {
+    background: linear-gradient(90deg, #e5d3b3 0%, #bfa76f 100%);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
