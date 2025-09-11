@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nippon Snack - Items</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans JP', 'Inter', sans-serif; background-color: #FEFBF6; }
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <span class="text-2xl font-bold" style="color: #E11D48;">Nippon Snack</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-rose-500 transition">Home</a>
+                <a href="items.html" class="text-gray-600 hover:text-rose-500 transition">Items</a>
+                <a href="about.html" class="text-gray-600 hover:text-rose-500 transition">About us</a>
+                <a href="contact.html" class="text-gray-600 hover:text-rose-500 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <section class="container mx-auto px-6 py-16">
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <img src="https://placehold.co/600x300/E11D48/FEFBF6?text=Random+Box" alt="Random Box" class="w-full h-64 object-cover">
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Random Box</h2>
+                <p class="text-gray-700 text-lg mb-6">日本の駄菓子が20コ入ったサプライズボックス！<br>中身は事前に知ることができません。開けるまでのお楽しみ！</p>
+                <ul class="list-disc list-inside text-gray-600 mb-6">
+                    <li>価格：<span class="text-rose-500 font-bold text-xl">$25.00</span></li>
+                    <li>内容：日本の人気駄菓子20種類</li>
+                    <li>中身はランダムで毎回異なります</li>
+                </ul>
+                <div class="bg-rose-50 border-l-4 border-rose-400 p-4 mb-6">
+                    <span class="font-bold text-rose-600">カスタマイズ可能！</span><br>
+                    もし「ほしい駄菓子」がある場合は、追加料金でボックス内容をカスタマイズできます。ご希望の駄菓子を選択して追加してください。
+                </div>
+                <a href="#customize" class="inline-block bg-rose-500 text-white font-bold py-3 px-6 rounded-lg shadow hover:bg-rose-600 transition">カスタマイズして注文する</a>
+            </div>
+        </div>
+        <div id="customize" class="max-w-xl mx-auto mt-12 bg-white rounded-lg shadow p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">カスタマイズ注文</h3>
+            <p class="text-gray-600 mb-4">ご希望の駄菓子を選択し、追加料金（1つにつき$2.00）でボックスに入れることができます。</p>
+            <form>
+                <label class="block mb-2 font-semibold text-gray-700">追加したい駄菓子名</label>
+                <input type="text" class="w-full border border-gray-300 rounded px-4 py-2 mb-4" placeholder="例：うまい棒、きなこ棒など">
+                <button type="submit" class="bg-rose-500 text-white font-bold py-2 px-6 rounded hover:bg-rose-600 transition">追加して注文</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

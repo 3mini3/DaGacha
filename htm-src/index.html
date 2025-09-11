@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaGacha! - Festival Dagashi Gacha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #dc2626;
+            --secondary-gold: #f59e0b;
+            --accent-pink: #f97316;
+            --text-dark: #374151;
+            --bg-light: #fef7f0;
+            --shadow-soft: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fef7f0 0%, #fde68a 25%, #fed7aa 50%, #fef7f0 100%);
+            background-attachment: fixed;
+            line-height: 1.7;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .header-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .header-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 120px;
+        }
+        
+        .header-wave .shape-fill {
+            fill: var(--bg-light);
+        }
+        
+        .matsuri-banner {
+            background: linear-gradient(45deg, var(--primary-red) 0%, var(--accent-pink) 50%, var(--secondary-gold) 100%);
+            color: #fff;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .matsuri-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .matsuri-lanterns {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .lantern {
+            width: 56px;
+            height: 72px;
+            background: radial-gradient(circle at 50% 40%, #fff 60%, var(--primary-red) 100%);
+            border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+            border: 3px solid var(--secondary-gold);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .lantern:nth-child(2) { animation-delay: -0.5s; }
+        .lantern:nth-child(3) { animation-delay: -1s; }
+        .lantern:nth-child(4) { animation-delay: -1.5s; }
+        .lantern:nth-child(5) { animation-delay: -2s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .lantern::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background: var(--secondary-gold);
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .seigaiha-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.1) 20%, transparent 20%),
+                radial-gradient(circle at 75% 75%, rgba(220, 38, 38, 0.1) 20%, transparent 20%);
+            background-size: 100px 100px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-red), var(--accent-pink));
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-shadow: 4px 4px 0 #fff, 8px 8px 0 rgba(220, 38, 38, 0.8);
+            margin-bottom: 2rem;
+        }
+        
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cart-animation {
+            animation: bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .slider-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        @media (max-width: 768px) {
+            .matsuri-lanterns {
+                gap: 1rem;
+            }
+            .lantern {
+                width: 40px;
+                height: 56px;
+            }
+            .hero-title {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="matsuri-banner text-center relative z-10">
+        <div class="relative z-20">🎉 It's Festival Time! Try your luck with DaGacha! Dagashi Gacha! 🎉</div>
+    </div>
+    <header class="glass-morphism shadow-lg sticky top-0 z-40 border-b border-white/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center gap-3 fade-in">
+                <!-- DaGacha! Matsuri Logo -->
+                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
+                    <circle cx="28" cy="28" r="28" fill="url(#logoGradient)"/>
+                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
+                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--secondary-gold);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--accent-pink);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="text-3xl font-extrabold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">DaGacha!</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Home</a>
+                <a href="items.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Gacha</a>
+                <a href="about.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">About Festival</a>
+                <a href="contact.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Contact</a>
+            </nav>
+            <button id="cart-button" class="relative text-gray-600 hover:text-red-500 transition-all duration-300 hover:scale-110 p-2">
+                <i class="fas fa-shopping-cart fa-lg"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-300 via-orange-200 to-red-300"></div>
+        <div class="seigaiha-bg absolute inset-0 opacity-30"></div>
+        <div class="container mx-auto px-6 py-20 text-center z-10 relative">
+            <div class="matsuri-lanterns fade-in">
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+            </div>
+            <h1 class="hero-title text-red-700 fade-in">
+                Festival Dagashi<br>
+                <span class="bg-gradient-to-r from-red-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+                    Gacha DaGacha!
+                </span>
+            </h1>
+            <p class="text-2xl md:text-3xl font-bold mb-8 text-red-700 fade-in" style="animation-delay: 0.2s;">
+                <span class="inline-block animate-pulse">🎪</span>
+                Excitement & Thrills!
+                <span class="inline-block animate-pulse">✨</span>
+                <br>
+                What will you get? It's a surprise!
+            </p>
+            <a href="#products" class="btn-primary inline-block fade-in text-lg" style="animation-delay: 0.4s;">
+                <i class="fas fa-dice mr-2"></i>
+                Spin the Gacha
+            </a>
+        </div>
+        <div class="header-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,2V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Random Box Section -->
+    <section id="products" class="container mx-auto px-6 py-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover">
+                <div class="relative">
+                    <img src="https://placehold.co/800x400/E11D48/FEFBF6?text=Random+Box" alt="Random Box" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
+                        <i class="fas fa-star mr-1"></i>
+                        Popular!
+                    </div>
+                </div>
+                <div class="p-10">
+                    <h2 class="text-4xl font-bold text-red-700 mb-6 text-center">
+                        <i class="fas fa-gift text-orange-500 mr-3"></i>
+                        DaGacha! Random Dagashi Box
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <p class="text-red-700 text-xl mb-6 leading-relaxed">A gacha box packed with 20 festival dagashi from Japan! What you get is a surprise until you open it!</p>
+                            <ul class="space-y-3 text-red-700 mb-8">
+                                <li class="flex items-center">
+                                    <i class="fas fa-tag text-orange-500 mr-3"></i>
+                                    Price: <span class="text-orange-500 font-bold text-2xl ml-2">$25.00</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-box text-orange-500 mr-3"></i>
+                                    Contents: 20 kinds of Japanese festival dagashi
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-dice text-orange-500 mr-3"></i>
+                                    Each box is random and unique
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 border-l-4 border-orange-500 p-6 rounded-lg shadow-inner">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-magic text-orange-500 text-xl mr-3"></i>
+                                <span class="font-bold text-red-700 text-lg">Customizable!</span>
+                            </div>
+                            <p class="text-red-700">If you have dagashi you want, you can customize your box for an extra fee. Select your favorite dagashi to add!</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-10">
+                        <button id="add-to-cart-btn" class="btn-primary text-xl px-12 py-4">
+                            <i class="fas fa-dice mr-3"></i>
+                            Spin the Gacha
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="customize" class="max-w-3xl mx-auto mt-16 slider-container">
+                <h3 class="text-3xl font-bold text-red-700 mb-6 text-center">
+                    <i class="fas fa-palette text-orange-500 mr-3"></i>
+                    Customize Your Box
+                </h3>
+                <p class="text-red-700 mb-8 text-center text-lg">Select your favorite dagashi and add them to your box for an extra $2.00 each.</p>
+                <div id="gallery-slider" class="flex items-center justify-center mb-8">
+                    <button id="slider-prev" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 mr-6 transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div id="slider-content" class="glass-morphism rounded-2xl shadow-lg p-6 flex flex-col items-center min-w-[200px] min-h-[250px] justify-center">
+                        <!-- Slider content will be injected by JS -->
+                    </div>
+                    <button id="slider-next" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 ml-6 transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="selected-dagashi" class="glass-morphism rounded-xl p-6">
+                    <h4 class="font-bold text-red-700 mb-4 text-xl flex items-center">
+                        <i class="fas fa-list-check text-orange-500 mr-3"></i>
+                        Selected Dagashi:
+                    </h4>
+                    <ul class="text-red-700" id="dagashi-list"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 fade-in">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/fecaca/881337?text=Our+Story" alt="Japanese Snack Assortment" class="rounded-3xl shadow-2xl w-full card-hover">
+                        <div class="absolute -top-6 -right-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white p-4 rounded-2xl shadow-lg rotate-12">
+                            <i class="fas fa-heart text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-red-400 to-pink-400 text-white p-4 rounded-2xl shadow-lg -rotate-12">
+                            <i class="fas fa-star text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 fade-in" style="animation-delay: 0.2s;">
+                    <div class="mb-8">
+                        <h2 class="text-4xl lg:text-5xl font-bold text-red-700 mb-6">
+                            <i class="fas fa-torii-gate text-orange-500 mr-3"></i>
+                            Delivering Festival<br>
+                            <span class="bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">
+                                Excitement!
+                            </span>
+                        </h2>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="glass-morphism p-6 rounded-2xl">
+                            <div class="flex items-start">
+                                <div class="bg-gradient-to-r from-orange-400 to-red-400 p-3 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-lantern text-white text-lg"></i>
+                                </div>
+                                <p class="text-red-700 text-lg leading-relaxed">DaGacha! brings you the fun of Japanese festivals and the thrill of dagashi gacha. Experience the excitement and surprise at home!</p>
+                            </div>
+                        </div>
+                        <div class="glass-morphism p-6 rounded-2xl">
+                            <div class="flex items-start">
+                                <div class="bg-gradient-to-r from-pink-400 to-red-400 p-3 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-users text-white text-lg"></i>
+                                </div>
+                                <p class="text-red-700 text-lg leading-relaxed">We carefully select popular dagashi from festivals all over Japan. Spin the gacha with friends and family and enjoy together!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <footer id="contact" class="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white pt-20 pb-12 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="seigaiha-bg w-full h-full"></div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="flex justify-center items-center gap-4 mb-8 fade-in">
+                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
+                    <circle cx="28" cy="28" r="28" fill="url(#footerGradient)"/>
+                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
+                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
+                    <defs>
+                        <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="text-4xl font-extrabold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">DaGacha!</span>
+            </div>
+            <p class="mb-10 text-yellow-100 text-xl leading-relaxed fade-in" style="animation-delay: 0.2s;">
+                <i class="fas fa-dice mr-2"></i>
+                Try your luck with festival dagashi gacha! Let's have fun together!
+                <i class="fas fa-heart ml-2 text-pink-300"></i>
+            </p>
+            <div class="flex justify-center space-x-8 mb-12 fade-in" style="animation-delay: 0.4s;">
+                <a href="#" class="group bg-gradient-to-r from-pink-500 to-red-500 p-4 rounded-full hover:from-pink-600 hover:to-red-600 transition-all duration-300 hover:scale-110 shadow-lg">
+                    <i class="fab fa-instagram fa-2x group-hover:animate-pulse"></i>
+                </a>
+                <a href="#" class="group bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110 shadow-lg">
+                    <i class="fab fa-facebook fa-2x group-hover:animate-pulse"></i>
+                </a>
+                <a href="#" class="group bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-full hover:from-cyan-500 hover:to-blue-600 transition-all duration-300 hover:scale-110 shadow-lg">
+                    <i class="fab fa-twitter fa-2x group-hover:animate-pulse"></i>
+                </a>
+            </div>
+            <div class="border-t border-white/20 pt-8 fade-in" style="animation-delay: 0.6s;">
+                <p class="text-yellow-200 flex items-center justify-center gap-2">
+                    <i class="fas fa-copyright"></i>
+                    <span>2025 DaGacha! All Rights Reserved.</span>
+                    <i class="fas fa-heart text-pink-300"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-end hidden z-50">
+        <div id="cart-sidebar" class="w-full max-w-md glass-morphism h-full shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <!-- Cart Header -->
+                <div class="flex justify-between items-center p-6 border-b border-white/20">
+                    <h3 class="text-2xl font-bold text-red-700 flex items-center">
+                        <i class="fas fa-shopping-cart mr-3 text-orange-500"></i>
+                        Your Cart
+                    </h3>
+                    <button id="close-cart-button" class="text-gray-500 hover:text-red-500 text-3xl font-bold transition-colors duration-200">&times;</button>
+                </div>
+
+                <!-- Cart Items -->
+                <div id="cart-items" class="flex-grow p-6 overflow-y-auto">
+                    <!-- Cart items will be injected by JavaScript -->
+                    <div id="empty-cart-message" class="text-center text-gray-500 py-12">
+                        <i class="fas fa-shopping-cart text-6xl mb-4 opacity-30"></i>
+                        <p class="text-lg">Your cart is empty.</p>
+                        <p class="text-sm mt-2">Add some delicious dagashi!</p>
+                    </div>
+                </div>
+
+                <!-- Cart Footer -->
+                <div class="p-6 border-t border-white/20 bg-gradient-to-r from-white/10 to-white/5">
+                    <div class="flex justify-between items-center mb-6 text-xl">
+                        <span class="font-bold text-red-700">Subtotal:</span>
+                        <span id="cart-subtotal" class="font-bold text-orange-500 text-2xl">$0.00</span>
+                    </div>
+                    <button class="w-full btn-primary py-4 text-lg">
+                        <i class="fas fa-credit-card mr-2"></i>
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Random Box 商品データ
+            const randomBox = {
+                id: 100,
+                name: 'Random Box',
+                price: 25.00,
+                image: 'https://placehold.co/600x300/E11D48/FEFBF6?text=Random+Box',
+                description: '日本の駄菓子が20コ入ったサプライズボックス！中身は事前に知ることができません。開けるまでのお楽しみ！',
+            };
+
+            const cartButton = document.getElementById('cart-button');
+            const closeCartButton = document.getElementById('close-cart-button');
+            const cartModal = document.getElementById('cart-modal');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+            let cart = [];
+
+            function addToCart() {
+                const cartItem = cart.find(item => item.id === randomBox.id);
+                if (cartItem) {
+                    cartItem.quantity++;
+                } else {
+                    cart.push({ ...randomBox, quantity: 1 });
+                }
+                updateCart();
+                openCart();
+            }
+
+            window.removeFromCart = (productId) => {
+                cart = cart.filter(item => item.id !== productId);
+                updateCart();
+            };
+
+            window.updateQuantity = (productId, change) => {
+                const cartItem = cart.find(item => item.id === productId);
+                if (cartItem) {
+                    cartItem.quantity += change;
+                    if (cartItem.quantity <= 0) {
+                        removeFromCart(productId);
+                    } else {
+                        updateCart();
+                    }
+                }
+            };
+
+            function updateCart() {
+                renderCartItems();
+                updateCartCount();
+                updateSubtotal();
+            }
+
+            function renderCartItems() {
+                if (cart.length === 0) {
+                    emptyCartMessage.classList.remove('hidden');
+                    cartItemsContainer.innerHTML = '';
+                    cartItemsContainer.appendChild(emptyCartMessage);
+                } else {
+                    emptyCartMessage.classList.add('hidden');
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="flex items-center gap-4 mb-4 pb-4 border-b last:border-b-0 cart-item-enter-active">
+                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md">
+                            <div class="flex-grow">
+                                <p class="font-semibold">${item.name}</p>
+                                <p class="text-gray-500 text-sm">$${item.price.toFixed(2)}</p>
+                                <div class="flex items-center mt-2">
+                                    <button class="w-6 h-6 bg-gray-200 rounded-full" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                    <span class="px-3">${item.quantity}</span>
+                                    <button class="w-6 h-6 bg-gray-200 rounded-full" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</p>
+                                <button class="text-rose-500 text-sm hover:underline" onclick="removeFromCart(${item.id})">Remove</button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            function updateCartCount() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+
+            function updateSubtotal() {
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            }
+
+            function openCart() {
+                cartModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                requestAnimationFrame(() => {
+                    cartSidebar.classList.remove('translate-x-full');
+                });
+            }
+
+            function closeCart() {
+                cartSidebar.classList.add('translate-x-full');
+                setTimeout(() => {
+                    cartModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+
+            cartButton.addEventListener('click', openCart);
+            closeCartButton.addEventListener('click', closeCart);
+            cartModal.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    closeCart();
+                }
+            });
+
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', addToCart);
+            }
+
+            // Slider dagashi data
+            const dagashiData = [
+                { name: "Umaibo", img: "https://placehold.co/100x100/E11D48/fff?text=Umaibo" },
+                { name: "Kinako Stick", img: "https://placehold.co/100x100/FECACA/333?text=Kinako+Stick" },
+                { name: "Ramune", img: "https://placehold.co/100x100/FFD700/333?text=Ramune" },
+                { name: "Senbei", img: "https://placehold.co/100x100/A7F3D0/333?text=Senbei" },
+                { name: "Choco Banana", img: "https://placehold.co/100x100/F0F0F0/333?text=Choco+Banana" }
+            ];
+            let sliderIndex = 0;
+            const sliderContent = document.getElementById('slider-content');
+            function renderSlider() {
+                const d = dagashiData[sliderIndex];
+                sliderContent.innerHTML = `
+                    <div class="text-center">
+                        <img src="${d.img}" alt="${d.name}" class="mb-4 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 mx-auto">
+                        <span class="font-bold text-lg text-red-700 mb-4 block">${d.name}</span>
+                        <button class="add-dagashi-btn btn-primary px-6 py-2 text-sm" data-name="${d.name}">
+                            <i class="fas fa-plus mr-2"></i>Add to Box
+                        </button>
+                    </div>
+                `;
+                // Add button event
+                sliderContent.querySelector('.add-dagashi-btn').onclick = function() {
+                    dagashiList.push(d.name);
+                    renderDagashiList();
+                    // Add visual feedback
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Added!';
+                    this.classList.add('cart-animation');
+                    setTimeout(() => {
+                        renderSlider();
+                    }, 1000);
+                };
+            }
+            document.getElementById('slider-prev').onclick = function() {
+                sliderIndex = (sliderIndex - 1 + dagashiData.length) % dagashiData.length;
+                renderSlider();
+            };
+            document.getElementById('slider-next').onclick = function() {
+                sliderIndex = (sliderIndex + 1) % dagashiData.length;
+                renderSlider();
+            };
+            renderSlider();
+
+            // Dagashi list functionality
+            let dagashiList = [];
+            
+            function renderDagashiList() {
+                const listElement = document.getElementById('dagashi-list');
+                if (dagashiList.length === 0) {
+                    listElement.innerHTML = '<li class="text-gray-500 italic">No dagashi selected yet</li>';
+                } else {
+                    listElement.innerHTML = dagashiList.map(item => 
+                        `<li class="flex items-center justify-between py-2 px-3 bg-white/50 rounded-lg mb-2">
+                            <span><i class="fas fa-candy-cane text-orange-500 mr-2"></i>${item}</span>
+                            <button onclick="removeDagashi('${item}')" class="text-red-500 hover:text-red-700 transition">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </li>`
+                    ).join('');
+                }
+            }
+            
+            window.removeDagashi = function(item) {
+                dagashiList = dagashiList.filter(d => d !== item);
+                renderDagashiList();
+            };
+            
+            renderDagashiList();
+            updateCart();
+        });
+    </script>
+</body>
+</html>

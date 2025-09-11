@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nippon Snack - Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: #FEFBF6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <span class="text-2xl font-bold" style="color: #E11D48;">Nippon Snack</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-rose-500 transition">Home</a>
+                <a href="items.html" class="text-gray-600 hover:text-rose-500 transition">Items</a>
+                <a href="about.html" class="text-gray-600 hover:text-rose-500 transition">About us</a>
+                <a href="contact.html" class="text-gray-600 hover:text-rose-500 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section id="product-details" class="container mx-auto px-6 py-16">
+        <div id="product-info" class="flex flex-col md:flex-row items-center gap-12">
+            <img id="product-image" src="" alt="Product Image" class="rounded-lg shadow-xl w-full md:w-1/2">
+            <div class="md:w-1/2 text-gray-700">
+                <h2 id="product-name" class="text-3xl font-bold text-gray-800 mb-2"></h2>
+                <p id="product-description" class="text-gray-500 mb-4"></p>
+                <p id="product-price" class="text-rose-500 font-bold text-2xl mt-4"></p>
+                <button id="add-to-cart-btn" class="mt-4 bg-rose-500 text-white py-2 px-4 rounded-md font-bold hover:bg-rose-600 transition">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+
+            const products = [
+                { id: 1, name: 'Sakuramochi', price: 10.00, image: '../assets/item1.jpg', description: 'Classic fluffy sponge cake with banana custard filling.' },
+                { id: 2, name: 'Matcha KitKat', price: 6.00, image: '../assets/item2.jpg', description: 'Popular chocolate bar with a rich green tea flavor.' },
+                { id: 3, name: 'Sanshoku Dango', price: 8.00, image: '../assets/item3.jpg', description: 'Sweet rice dumplings on a skewer, in three colors.' },
+                // Add more products as needed
+            ];
+
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+                document.getElementById('product-image').src = product.image;
+            } else {
+                document.getElementById('product-info').innerHTML = '<p class="text-red-500">Product not found.</p>';
+            }
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                // Add to cart functionality can be implemented here
+                alert(`${product.name} has been added to your cart!`);
+            });
+        });
+    </script>
+</body>
+</html>
