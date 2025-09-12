@@ -216,6 +216,73 @@
             box-shadow: var(--shadow-soft);
         }
         
+        /* Flavor Mixer Styles */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            outline: none;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+        
+        .slider-1::-webkit-slider-thumb { 
+            background: linear-gradient(45deg, var(--accent-pink), #f472b6); 
+        }
+        .slider-2::-webkit-slider-thumb { 
+            background: linear-gradient(45deg, #2dd4bf, #0891b2); 
+        }
+        .slider-3::-webkit-slider-thumb { 
+            background: linear-gradient(45deg, var(--secondary-gold), var(--accent-pink)); 
+        }
+
+        .capsule-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+            gap: 6px;
+            min-height: 80px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .capsule {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, background-color 0.3s;
+            transform: scale(0.9);
+            animation: capsule-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes capsule-pop-in {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .capsule:hover {
+            transform: scale(1);
+        }
+
         @media (max-width: 768px) {
             .matsuri-lanterns {
                 gap: 1rem;
@@ -226,6 +293,14 @@
             }
             .hero-title {
                 font-size: clamp(2rem, 6vw, 3rem);
+            }
+            .capsule-wrapper {
+                grid-template-columns: repeat(auto-fill, minmax(16px, 1fr));
+                gap: 4px;
+            }
+            .capsule {
+                width: 16px;
+                height: 16px;
             }
         }
     </style>
@@ -341,10 +416,10 @@
                         </div>
                         <div class="bg-gradient-to-br from-orange-50 to-yellow-50 border-l-4 border-orange-500 p-6 rounded-lg shadow-inner">
                             <div class="flex items-center mb-3">
-                                <i class="fas fa-magic text-orange-500 text-xl mr-3"></i>
-                                <span class="font-bold text-red-700 text-lg">Customizable!</span>
+                                <i class="fas fa-flask text-orange-500 text-xl mr-3"></i>
+                                <span class="font-bold text-red-700 text-lg">Flavor Mixer!</span>
                             </div>
-                            <p class="text-red-700">If you have dagashi you want, you can customize your box for an extra fee. Select your favorite dagashi to add!</p>
+                            <p class="text-red-700">Create your own unique flavor blend! Mix sweet, salty, and spicy flavors to craft the perfect dagashi experience just for you!</p>
                         </div>
                     </div>
                     <div class="text-center mt-10">
@@ -356,29 +431,89 @@
                 </div>
             </div>
             
-            <div id="customize" class="max-w-3xl mx-auto mt-16 slider-container">
+            <!-- Flavor Mixing Section -->
+            <div id="flavor-mixing" class="max-w-3xl mx-auto mt-16 slider-container">
                 <h3 class="text-3xl font-bold text-red-700 mb-6 text-center">
-                    <i class="fas fa-palette text-orange-500 mr-3"></i>
-                    Customize Your Box
+                    <i class="fas fa-flask text-orange-500 mr-3"></i>
+                    Flavor Mixer
                 </h3>
-                <p class="text-red-700 mb-8 text-center text-lg">Select your favorite dagashi and add them to your box. Each item has its own price shown below.</p>
-                <div id="gallery-slider" class="flex items-center justify-center mb-8">
-                    <button id="slider-prev" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 mr-6 transition-all duration-300 hover:scale-105">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div id="slider-content" class="glass-morphism rounded-2xl shadow-lg p-6 flex flex-col items-center min-w-[200px] min-h-[250px] justify-center">
-                        <!-- Slider content will be injected by JS -->
+                <p class="text-red-700 mb-8 text-center text-lg">Create your perfect flavor blend! Adjust the sliders to mix different flavor ratios.</p>
+                
+                <div class="space-y-6">
+                    <!-- Unassigned Capsules Box -->
+                    <div id="box0" class="glass-morphism rounded-xl shadow-lg p-4">
+                        <h4 class="text-center font-bold text-gray-600 mb-3 flex items-center justify-center">
+                            <i class="fas fa-cube text-orange-500 mr-2"></i>
+                            Available Capsules
+                            <span id="count0" class="ml-3 px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">30</span>
+                        </h4>
+                        <div class="capsule-wrapper bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border-2 border-dashed border-gray-300"></div>
                     </div>
-                    <button id="slider-next" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 ml-6 transition-all duration-300 hover:scale-105">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div id="selected-dagashi" class="glass-morphism rounded-xl p-6">
-                    <h4 class="font-bold text-red-700 mb-4 text-xl flex items-center">
-                        <i class="fas fa-list-check text-orange-500 mr-3"></i>
-                        Selected Dagashi:
-                    </h4>
-                    <ul class="text-red-700" id="dagashi-list"></ul>
+
+                    <!-- Sweet Flavor Group -->
+                    <div class="glass-morphism rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-4 bg-gradient-to-r from-pink-100 to-red-100 border-b-2 border-red-200">
+                            <label for="slider1" class="flex items-center justify-between text-lg font-bold text-red-700">
+                                <span class="flex items-center">
+                                    <i class="fas fa-candy-cane text-pink-500 mr-3"></i>
+                                    🍬 Sweet Flavor
+                                </span>
+                                <span id="count1" class="px-3 py-1 bg-pink-200 text-pink-800 rounded-full text-sm font-bold">0</span>
+                            </label>
+                            <input type="range" id="slider1" data-index="1" min="0" max="30" value="0" class="w-full mt-3 slider-1" style="height: 8px;">
+                        </div>
+                        <div id="box1" class="p-4">
+                            <div class="capsule-wrapper bg-gradient-to-br from-pink-50 to-red-50 rounded-lg border border-pink-200"></div>
+                        </div>
+                    </div>
+
+                    <!-- Salty Flavor Group -->
+                    <div class="glass-morphism rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-4 bg-gradient-to-r from-blue-100 to-teal-100 border-b-2 border-teal-200">
+                            <label for="slider2" class="flex items-center justify-between text-lg font-bold text-red-700">
+                                <span class="flex items-center">
+                                    <i class="fas fa-seedling text-teal-500 mr-3"></i>
+                                    🧂 Salty Flavor
+                                </span>
+                                <span id="count2" class="px-3 py-1 bg-teal-200 text-teal-800 rounded-full text-sm font-bold">0</span>
+                            </label>
+                            <input type="range" id="slider2" data-index="2" min="0" max="30" value="0" class="w-full mt-3 slider-2" style="height: 8px;">
+                        </div>
+                        <div id="box2" class="p-4">
+                            <div class="capsule-wrapper bg-gradient-to-br from-blue-50 to-teal-50 rounded-lg border border-teal-200"></div>
+                        </div>
+                    </div>
+
+                    <!-- Spicy Flavor Group -->
+                    <div class="glass-morphism rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-4 bg-gradient-to-r from-orange-100 to-red-100 border-b-2 border-orange-200">
+                            <label for="slider3" class="flex items-center justify-between text-lg font-bold text-red-700">
+                                <span class="flex items-center">
+                                    <i class="fas fa-fire text-orange-500 mr-3"></i>
+                                    🔥 Spicy Flavor
+                                </span>
+                                <span id="count3" class="px-3 py-1 bg-orange-200 text-orange-800 rounded-full text-sm font-bold">0</span>
+                            </label>
+                            <input type="range" id="slider3" data-index="3" min="0" max="30" value="0" class="w-full mt-3 slider-3" style="height: 8px;">
+                        </div>
+                        <div id="box3" class="p-4">
+                            <div class="capsule-wrapper bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-200"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mix Results -->
+                    <div class="glass-morphism rounded-xl shadow-lg p-6 bg-gradient-to-br from-yellow-50 to-orange-50">
+                        <h4 class="font-bold text-red-700 mb-4 text-xl flex items-center justify-center">
+                            <i class="fas fa-magic text-orange-500 mr-3"></i>
+                            Your Custom Mix
+                        </h4>
+                        <div id="mix-result" class="text-center text-red-700">
+                            <p class="text-lg">Adjust the sliders above to create your perfect flavor combination!</p>
+                            <div id="flavor-preview" class="mt-4 text-sm text-gray-600">
+                                <!-- Flavor preview will be generated here -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -641,133 +776,165 @@
                 addToCartBtn.addEventListener('click', addToCart);
             }
 
-            // Slider dagashi data - Updated from assets/items.pdf
-            const dagashiData = [
-                { name: "うまい棒", img: "https://placehold.co/120x120/E11D48/fff?text=うまい棒", category: "塩っぽい", price: 10 },
-                { name: "チロルチョコ", img: "https://placehold.co/120x120/8B4513/fff?text=チロル", category: "チョコ", price: 23 },
-                { name: "くっぴーラムネ", img: "https://placehold.co/120x120/87CEEB/333?text=ラムネ", category: "砂糖", price: 30 },
-                { name: "フエラムネ", img: "https://placehold.co/120x120/FFD700/333?text=フエラムネ", category: "砂糖", price: 70 },
-                { name: "ココアシガレット", img: "https://placehold.co/120x120/8B4513/fff?text=ココア", category: "チョコ", price: 20 },
-                { name: "ミニコーラ", img: "https://placehold.co/120x120/DC143C/fff?text=コーラ", category: "チョコ", price: 30 },
-                { name: "チョコバット", img: "https://placehold.co/120x120/654321/fff?text=バット", category: "砂糖", price: 50 },
-                { name: "きなこ棒", img: "https://placehold.co/120x120/DEB887/333?text=きなこ", category: "砂糖", price: 40 },
-                { name: "ボンタンアメ", img: "https://placehold.co/120x120/FFA500/333?text=ボンタン", category: "砂糖", price: 60 },
-                { name: "キャベツ太郎", img: "https://placehold.co/120x120/32CD32/333?text=キャベツ", category: "塩っぽい", price: 30 },
-                { name: "ベビースターラーメン", img: "https://placehold.co/120x120/FF6347/fff?text=ベビースター", category: "塩っぽい", price: 50 },
-                { name: "ビッグカツ", img: "https://placehold.co/120x120/D2691E/fff?text=カツ", category: "塩っぽい", price: 30 },
-                { name: "蒲焼さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=蒲焼", category: "塩っぽい", price: 30 },
-                { name: "どんどん焼き", img: "https://placehold.co/120x120/F4A460/333?text=焼き", category: "塩っぽい", price: 40 },
-                { name: "ふがし", img: "https://placehold.co/120x120/F5DEB3/333?text=ふがし", category: "塩っぽい", price: 20 },
-                { name: "黒棒", img: "https://placehold.co/120x120/2F4F4F/fff?text=黒棒", category: "塩っぽい", price: 30 },
-                { name: "玉葱さん太郎", img: "https://placehold.co/120x120/FFFF99/333?text=玉葱", category: "塩っぽい", price: 30 },
-                { name: "チーズあられ", img: "https://placehold.co/120x120/FFD700/333?text=チーズ", category: "塩っぽい", price: 50 },
-                { name: "ソースせんべい", img: "https://placehold.co/120x120/8B4513/fff?text=ソース", category: "塩っぽい", price: 40 },
-                { name: "タラタラしてんじゃね～よ", img: "https://placehold.co/120x120/FF4500/fff?text=タラタラ", category: "辛い", price: 80 },
-                { name: "焼肉さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=焼肉", category: "辛い", price: 30 },
-                { name: "酢だこさん太郎", img: "https://placehold.co/120x120/DC143C/fff?text=酢だこ", category: "辛い", price: 30 }
+            // Flavor Mixer functionality
+            const TOTAL_CAPSULES = 30;
+            const sliders = [
+                document.getElementById('slider1'),
+                document.getElementById('slider2'),
+                document.getElementById('slider3')
             ];
-            let sliderIndex = 0;
-            const sliderContent = document.getElementById('slider-content');
-            function renderSlider() {
-                const d = dagashiData[sliderIndex];
-                const categoryColor = {
-                    '塩っぽい': 'text-blue-600',
-                    'チョコ': 'text-amber-600', 
-                    '砂糖': 'text-pink-600',
-                    '辛い': 'text-red-600'
-                }[d.category] || 'text-gray-600';
-                
-                sliderContent.innerHTML = `
-                    <div class="text-center">
-                        <div class="relative inline-block mb-4">
-                            <img src="${d.img}" alt="${d.name}" class="rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 mx-auto">
-                            <div class="absolute -top-2 -right-2 bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg">
-                                ¥${d.price}
+            const boxWrappers = [
+                document.querySelector('#box0 .capsule-wrapper'),
+                document.querySelector('#box1 .capsule-wrapper'),
+                document.querySelector('#box2 .capsule-wrapper'),
+                document.querySelector('#box3 .capsule-wrapper')
+            ];
+            const countSpans = [
+                document.getElementById('count0'),
+                document.getElementById('count1'),
+                document.getElementById('count2'),
+                document.getElementById('count3')
+            ];
+            const BOX_COLORS = [
+                '#9ca3af', // Unassigned (Gray)
+                '#f472b6', // Sweet (Pink)
+                '#2dd4bf', // Salty (Teal)
+                '#fb923c'  // Spicy (Orange)
+            ];
+
+            // State management: capsule count for each box
+            let boxCounts = [TOTAL_CAPSULES, 0, 0, 0];
+
+            /**
+             * Update entire UI to latest state
+             */
+            function updateFlavorMixerUI() {
+                // Calculate unassigned capsules
+                const allocated = boxCounts[1] + boxCounts[2] + boxCounts[3];
+                boxCounts[0] = TOTAL_CAPSULES - allocated;
+
+                // Update each box display
+                for (let i = 0; i <= 3; i++) {
+                    countSpans[i].textContent = boxCounts[i];
+                    drawCapsules(i, boxCounts[i]);
+                }
+
+                // Update flavor preview
+                updateFlavorPreview();
+            }
+
+            /**
+             * Draw capsules in specified box
+             * @param {number} boxIndex - Box index (0-3)
+             * @param {number} count - Number of capsules to draw
+             */
+            function drawCapsules(boxIndex, count) {
+                const wrapper = boxWrappers[boxIndex];
+                wrapper.innerHTML = '';
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < count; i++) {
+                    const capsule = document.createElement('div');
+                    capsule.className = 'capsule';
+                    capsule.style.backgroundColor = BOX_COLORS[boxIndex];
+                    capsule.style.animationDelay = `${i * 0.02}s`;
+                    fragment.appendChild(capsule);
+                }
+                wrapper.appendChild(fragment);
+            }
+
+            /**
+             * Handle slider change events
+             * @param {Event} e - Input event object
+             */
+            function handleFlavorSliderChange(e) {
+                const changedIndex = parseInt(e.target.dataset.index, 10);
+                let newValue = parseInt(e.target.value, 10);
+
+                // Calculate total allocated to other sliders
+                let otherAllocated = 0;
+                for (let i = 1; i <= 3; i++) {
+                    if (i !== changedIndex) {
+                        otherAllocated += boxCounts[i];
+                    }
+                }
+
+                // Calculate max allowed for this slider
+                const maxAllowed = TOTAL_CAPSULES - otherAllocated;
+
+                // Limit new value if it exceeds max
+                if (newValue > maxAllowed) {
+                    newValue = maxAllowed;
+                    e.target.value = newValue;
+                }
+
+                // Update state
+                boxCounts[changedIndex] = newValue;
+
+                // Re-render UI
+                updateFlavorMixerUI();
+            }
+
+            /**
+             * Update flavor preview based on current mix
+             */
+            function updateFlavorPreview() {
+                const flavorPreview = document.getElementById('flavor-preview');
+                const sweet = boxCounts[1];
+                const salty = boxCounts[2];
+                const spicy = boxCounts[3];
+                const total = sweet + salty + spicy;
+
+                if (total === 0) {
+                    flavorPreview.innerHTML = '<p class="text-gray-500 italic">No flavors mixed yet</p>';
+                    return;
+                }
+
+                const sweetPercent = Math.round((sweet / total) * 100);
+                const saltyPercent = Math.round((salty / total) * 100);
+                const spicyPercent = Math.round((spicy / total) * 100);
+
+                let flavorProfile = '';
+                if (sweetPercent > 50) {
+                    flavorProfile = '🍬 Sweet Dominant - A delightfully sweet experience!';
+                } else if (saltyPercent > 50) {
+                    flavorProfile = '🧂 Salty Dominant - Bold and savory flavor!';
+                } else if (spicyPercent > 50) {
+                    flavorProfile = '🔥 Spicy Dominant - Hot and exciting taste!';
+                } else if (sweetPercent > 30 && saltyPercent > 30) {
+                    flavorProfile = '🍯 Sweet & Salty - Perfect balance of flavors!';
+                } else if (sweetPercent > 30 && spicyPercent > 30) {
+                    flavorProfile = '🌶️ Sweet & Spicy - Exciting flavor combination!';
+                } else if (saltyPercent > 30 && spicyPercent > 30) {
+                    flavorProfile = '🔥 Salty & Spicy - Bold and intense taste!';
+                } else {
+                    flavorProfile = '🎭 Balanced Mix - Complex flavor harmony!';
+                }
+
+                flavorPreview.innerHTML = `
+                    <div class="bg-white/50 rounded-lg p-4 border border-orange-200">
+                        <p class="font-bold text-red-700 mb-3">${flavorProfile}</p>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-pink-600">🍬 Sweet: ${sweetPercent}%</span>
+                            <span class="text-teal-600">🧂 Salty: ${saltyPercent}%</span>
+                            <span class="text-orange-600">🔥 Spicy: ${spicyPercent}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div class="h-full flex">
+                                <div class="bg-pink-400" style="width: ${sweetPercent}%"></div>
+                                <div class="bg-teal-400" style="width: ${saltyPercent}%"></div>
+                                <div class="bg-orange-400" style="width: ${spicyPercent}%"></div>
                             </div>
                         </div>
-                        <span class="font-bold text-lg text-red-700 mb-2 block">${d.name}</span>
-                        <span class="text-sm ${categoryColor} mb-4 block font-semibold">
-                            <i class="fas fa-tag mr-1"></i>${d.category}
-                        </span>
-                        <button class="add-dagashi-btn btn-primary px-6 py-2 text-sm" data-name="${d.name}" data-price="${d.price}">
-                            <i class="fas fa-plus mr-2"></i>Add to Box (+¥${d.price})
-                        </button>
+                        <p class="text-xs text-gray-600 mt-2">Total Capsules Mixed: ${total}/30</p>
                     </div>
                 `;
-                // Add button event
-                sliderContent.querySelector('.add-dagashi-btn').onclick = function() {
-                    const existingItem = dagashiList.find(item => item.name === d.name);
-                    if (!existingItem) {
-                        dagashiList.push({ name: d.name, price: d.price, category: d.category });
-                        renderDagashiList();
-                        // Add visual feedback
-                        this.innerHTML = '<i class="fas fa-check mr-2"></i>Added!';
-                        this.classList.add('cart-animation');
-                        setTimeout(() => {
-                            renderSlider();
-                        }, 1000);
-                    } else {
-                        // Already added feedback
-                        this.innerHTML = '<i class="fas fa-check mr-2"></i>Already Added!';
-                        this.classList.add('bg-gray-400');
-                        setTimeout(() => {
-                            renderSlider();
-                        }, 1000);
-                    }
-                };
             }
-            document.getElementById('slider-prev').onclick = function() {
-                sliderIndex = (sliderIndex - 1 + dagashiData.length) % dagashiData.length;
-                renderSlider();
-            };
-            document.getElementById('slider-next').onclick = function() {
-                sliderIndex = (sliderIndex + 1) % dagashiData.length;
-                renderSlider();
-            };
-            renderSlider();
 
-            // Dagashi list functionality
-            let dagashiList = [];
-            
-            function renderDagashiList() {
-                const listElement = document.getElementById('dagashi-list');
-                if (dagashiList.length === 0) {
-                    listElement.innerHTML = '<li class="text-gray-500 italic">No dagashi selected yet</li>';
-                } else {
-                    const totalPrice = dagashiList.reduce((sum, item) => sum + item.price, 0);
-                    listElement.innerHTML = dagashiList.map((item, index) => 
-                        `<li class="flex items-center justify-between py-3 px-4 bg-white/50 rounded-lg mb-2 shadow-sm">
-                            <div class="flex items-center">
-                                <i class="fas fa-candy-cane text-orange-500 mr-3"></i>
-                                <div>
-                                    <span class="font-semibold text-red-700">${item.name}</span>
-                                    <div class="text-xs text-gray-600">
-                                        <span class="bg-gray-100 px-2 py-1 rounded-full">${item.category}</span>
-                                        <span class="ml-2 font-bold text-orange-600">¥${item.price}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button onclick="removeDagashi(${index})" class="text-red-500 hover:text-red-700 transition hover:scale-110 p-1">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </li>`
-                    ).join('') + 
-                    `<div class="mt-4 p-3 bg-gradient-to-r from-orange-100 to-red-100 rounded-lg border-l-4 border-orange-500">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-red-700">Custom Items Total:</span>
-                            <span class="font-bold text-orange-600 text-lg">¥${totalPrice}</span>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-1">Additional cost for customization</p>
-                    </div>`;
-                }
-            }
-            
-            window.removeDagashi = function(index) {
-                dagashiList.splice(index, 1);
-                renderDagashiList();
-            };
-            
-            renderDagashiList();
+            // Initialize flavor mixer
+            updateFlavorMixerUI();
+            sliders.forEach(slider => {
+                slider.addEventListener('input', handleFlavorSliderChange);
+            });
             updateCart();
         });
     </script>
