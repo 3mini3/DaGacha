@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DaGacha! - Festival Dagashi Gacha</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary-red: #dc2626;
-            --secondary-gold: #f59e0b;
-            --accent-pink: #f97316;
-            --text-dark: #374151;
-            --bg-light: #fef7f0;
-            --shadow-soft: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --primary-pink: #f8bbd9;
+            --secondary-mint: #a7e6d7;
+            --accent-peach: #ffd4cc;
+            --soft-purple: #e0c3fc;
+            --cream-white: #fef9f5;
+            --text-soft: #6b5b73;
+            --text-dark: #4a3c56;
+            --shadow-soft: 0 20px 25px -5px rgba(171, 126, 168, 0.15), 0 10px 10px -5px rgba(171, 126, 168, 0.08);
+            --shadow-cute: 0 8px 32px rgba(248, 187, 217, 0.3);
         }
         
         * {
@@ -22,16 +26,18 @@
         }
         
         body {
-            font-family: 'Noto Sans JP', 'Inter', sans-serif;
-            background: linear-gradient(135deg, #fef7f0 0%, #fde68a 25%, #fed7aa 50%, #fef7f0 100%);
+            font-family: 'M PLUS Rounded 1c', 'Klee One', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 20%, #e8f5e8 40%, #fff3e0 60%, #fce4ec 80%, #f8bbd9 100%);
             background-attachment: fixed;
             line-height: 1.7;
+            color: var(--text-soft);
         }
         
         .glass-morphism {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 245, 250, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(248, 187, 217, 0.3);
+            box-shadow: var(--shadow-cute);
         }
         
         .card-hover {
@@ -61,22 +67,23 @@
         }
         
         .header-wave .shape-fill {
-            fill: var(--bg-light);
+            fill: var(--cream-white);
         }
         
-        .matsuri-banner {
-            background: linear-gradient(45deg, var(--primary-red) 0%, var(--accent-pink) 50%, var(--secondary-gold) 100%);
-            color: #fff;
+        .kawaii-banner {
+            background: linear-gradient(45deg, var(--primary-pink) 0%, var(--accent-peach) 50%, var(--secondary-mint) 100%);
+            color: var(--text-dark);
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             font-weight: 800;
             letter-spacing: 0.05em;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.7);
             padding: 1rem 0;
             position: relative;
             overflow: hidden;
+            border-bottom: 3px solid var(--primary-pink);
         }
         
-        .matsuri-banner::before {
+        .kawaii-banner::before {
             content: '';
             position: absolute;
             top: 0;
@@ -92,66 +99,101 @@
             100% { left: 100%; }
         }
         
-        .matsuri-lanterns {
+        .kawaii-capsules {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 2rem 0;
             flex-wrap: wrap;
         }
         
-        .lantern {
-            width: 56px;
-            height: 72px;
-            background: radial-gradient(circle at 50% 40%, #fff 60%, var(--primary-red) 100%);
-            border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
-            border: 3px solid var(--secondary-gold);
-            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+        .gacha-capsule {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             position: relative;
-            animation: float 3s ease-in-out infinite;
+            animation: bounce 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
         
-        .lantern:nth-child(2) { animation-delay: -0.5s; }
-        .lantern:nth-child(3) { animation-delay: -1s; }
-        .lantern:nth-child(4) { animation-delay: -1.5s; }
-        .lantern:nth-child(5) { animation-delay: -2s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .gacha-capsule:hover {
+            transform: scale(1.1);
         }
         
-        .lantern::after {
+        .gacha-capsule:nth-child(1) { 
+            background: linear-gradient(135deg, var(--primary-pink), #ffc1cc);
+            animation-delay: -0.2s; 
+        }
+        .gacha-capsule:nth-child(2) { 
+            background: linear-gradient(135deg, var(--secondary-mint), #b3f0e6);
+            animation-delay: -0.4s; 
+        }
+        .gacha-capsule:nth-child(3) { 
+            background: linear-gradient(135deg, var(--accent-peach), #ffe6d9);
+            animation-delay: -0.6s; 
+        }
+        .gacha-capsule:nth-child(4) { 
+            background: linear-gradient(135deg, var(--soft-purple), #f0d7ff);
+            animation-delay: -0.8s; 
+        }
+        .gacha-capsule:nth-child(5) { 
+            background: linear-gradient(135deg, #fff5b3, #fffacc);
+            animation-delay: -1s; 
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            50% { transform: translateY(-12px) rotate(0deg); }
+            75% { transform: translateY(-8px) rotate(-2deg); }
+        }
+        
+        .gacha-capsule::before {
             content: '';
-            display: block;
             position: absolute;
-            left: 50%;
-            bottom: -15px;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 20px;
-            background: var(--secondary-gold);
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .gacha-capsule::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            font-size: 16px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
         
         .seigaiha-bg {
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.1) 20%, transparent 20%),
-                radial-gradient(circle at 75% 75%, rgba(220, 38, 38, 0.1) 20%, transparent 20%);
-            background-size: 100px 100px;
+                radial-gradient(circle at 25% 25%, rgba(248, 187, 217, 0.15) 20%, transparent 20%),
+                radial-gradient(circle at 75% 75%, rgba(167, 230, 215, 0.15) 20%, transparent 20%);
+            background-size: 80px 80px;
         }
         
         .btn-primary {
-            background: linear-gradient(45deg, var(--primary-red), var(--accent-pink));
-            color: white;
-            font-weight: 600;
-            padding: 0.875rem 2rem;
+            background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            box-shadow: var(--shadow-cute);
             position: relative;
             overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
         
         .btn-primary::before {
@@ -170,16 +212,18 @@
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(248, 187, 217, 0.5);
+            background: linear-gradient(45deg, var(--accent-peach), var(--secondary-mint));
         }
         
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
             line-height: 0.9;
-            text-shadow: 4px 4px 0 #fff, 8px 8px 0 rgba(220, 38, 38, 0.8);
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(248, 187, 217, 0.6), 6px 6px 0 rgba(167, 230, 215, 0.4);
             margin-bottom: 2rem;
+            color: var(--text-dark);
         }
         
         .fade-in {
@@ -233,36 +277,25 @@
 <body>
 
     <!-- Header -->
-    <div class="matsuri-banner text-center relative z-10">
-        <div class="relative z-20">🎉 It's Festival Time! Try your luck with DaGacha! Dagashi Gacha! 🎉</div>
+    <div class="kawaii-banner text-center relative z-10">
+        <div class="relative z-20">✨ Kawaii Gacha Time! Discover cute surprises in every capsule! ✨</div>
     </div>
     <header class="glass-morphism shadow-lg sticky top-0 z-40 border-b border-white/20">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="flex items-center gap-3 fade-in">
-                <!-- DaGacha! Matsuri Logo -->
-                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
-                    <circle cx="28" cy="28" r="28" fill="url(#logoGradient)"/>
-                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
-                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:var(--secondary-gold);stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:var(--accent-pink);stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="text-3xl font-extrabold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">DaGacha!</span>
+            <a href="#home" class="flex items-center fade-in">
+                <!-- DaGacha! Simple Logo -->
+                <img src="../assets/logo-simple.png" alt="DaGacha!" class="h-12 w-auto max-w-[200px] hover:scale-105 transition-transform duration-300">
             </a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-orange-500 font-bold border-b-2 border-orange-500">Home</a>
-                <a href="items.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Gacha</a>
-                <a href="about.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">About</a>
-                <a href="history.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">History</a>
-                <a href="contact.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Contact</a>
+                <a href="index.html" class="font-bold border-b-2 border-current" style="color: var(--primary-pink);">Home</a>
+                <a href="items.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Gacha</a>
+                <a href="about.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">About</a>
+                <a href="history.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">History</a>
+                <a href="contact.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Contact</a>
             </nav>
-            <button id="cart-button" class="relative text-gray-600 hover:text-red-500 transition-all duration-300 hover:scale-110 p-2">
-                <i class="fas fa-shopping-cart fa-lg"></i>
-                <span id="cart-count" class="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg">0</span>
+            <button id="cart-button" class="relative transition-all duration-300 hover:scale-110 p-2" style="color: var(--text-soft);">
+                <i class="fas fa-shopping-cart fa-lg" style="color: var(--text-soft);"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg" style="background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));">0</span>
             </button>
         </div>
     </header>
@@ -272,29 +305,29 @@
         <div class="absolute inset-0 bg-gradient-to-br from-amber-300 via-orange-200 to-red-300"></div>
         <div class="seigaiha-bg absolute inset-0 opacity-30"></div>
         <div class="container mx-auto px-6 py-20 text-center z-10 relative">
-            <div class="matsuri-lanterns fade-in">
-                <div class="lantern"></div>
-                <div class="lantern"></div>
-                <div class="lantern"></div>
-                <div class="lantern"></div>
-                <div class="lantern"></div>
+            <div class="kawaii-capsules fade-in">
+                <div class="gacha-capsule"></div>
+                <div class="gacha-capsule"></div>
+                <div class="gacha-capsule"></div>
+                <div class="gacha-capsule"></div>
+                <div class="gacha-capsule"></div>
             </div>
-            <h1 class="hero-title text-red-700 fade-in">
-                Festival Dagashi<br>
-                <span class="bg-gradient-to-r from-red-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+            <h1 class="hero-title fade-in" style="color: var(--text-dark);">
+                Kawaii Dagashi<br>
+                <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-mint-400 bg-clip-text text-transparent">
                     Gacha DaGacha!
                 </span>
             </h1>
-            <p class="text-2xl md:text-3xl font-bold mb-8 text-red-700 fade-in" style="animation-delay: 0.2s;">
-                <span class="inline-block animate-pulse">🎪</span>
-                Excitement & Thrills!
-                <span class="inline-block animate-pulse">✨</span>
+            <p class="text-2xl md:text-3xl font-bold mb-8 fade-in" style="color: var(--text-soft); animation-delay: 0.2s;">
+                <span class="inline-block animate-pulse">🌸</span>
+                Super Cute & Sweet!
+                <span class="inline-block animate-pulse">💕</span>
                 <br>
-                What will you get? It's a surprise!
+                Discover adorable surprises in every capsule!
             </p>
             <a href="#products" class="btn-primary inline-block fade-in text-lg" style="animation-delay: 0.4s;">
-                <i class="fas fa-dice mr-2"></i>
-                Spin the Gacha
+                <i class="fas fa-heart mr-2"></i>
+                Open Kawaii Gacha
             </a>
         </div>
         <div class="header-wave">
@@ -317,25 +350,25 @@
                     </div>
                 </div>
                 <div class="p-10">
-                    <h2 class="text-4xl font-bold text-red-700 mb-6 text-center">
-                        <i class="fas fa-gift text-orange-500 mr-3"></i>
-                        DaGacha! Random Dagashi Box
+                    <h2 class="text-4xl font-bold mb-6 text-center" style="color: var(--text-dark);">
+                        <i class="fas fa-sparkles mr-3" style="color: var(--primary-pink);"></i>
+                        DaGacha! Kawaii Dagashi Box
                     </h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <p class="text-red-700 text-xl mb-6 leading-relaxed">A gacha box packed with 20 festival dagashi from Japan! What you get is a surprise until you open it!</p>
-                            <ul class="space-y-3 text-red-700 mb-8">
+                            <p class="text-xl mb-6 leading-relaxed" style="color: var(--text-soft);">A super kawaii gacha box filled with 30 adorable Japanese dagashi! Each surprise is carefully selected to bring you maximum cuteness!</p>
+                            <ul class="space-y-3 mb-8" style="color: var(--text-soft);">
                                 <li class="flex items-center">
-                                    <i class="fas fa-tag text-orange-500 mr-3"></i>
-                                    Price: <span class="text-orange-500 font-bold text-2xl ml-2">$25.00</span>
+                                    <i class="fas fa-heart mr-3" style="color: var(--primary-pink);"></i>
+                                    Price: <span class="font-bold text-2xl ml-2" style="color: var(--primary-pink);">$25.00</span>
                                 </li>
                                 <li class="flex items-center">
-                                    <i class="fas fa-box text-orange-500 mr-3"></i>
-                                    Contents: 30 pics of Japanese "Dagashi"
+                                    <i class="fas fa-gift mr-3" style="color: var(--secondary-mint);"></i>
+                                    Contents: 30 pieces of kawaii Japanese "Dagashi"
                                 </li>
                                 <li class="flex items-center">
-                                    <i class="fas fa-dice text-orange-500 mr-3"></i>
-                                    Each box is random and unique
+                                    <i class="fas fa-sparkles mr-3" style="color: var(--accent-peach);"></i>
+                                    Each box is uniquely cute and surprise-filled
                                 </li>
                             </ul>
                         </div>
@@ -366,7 +399,7 @@
                     <button id="slider-prev" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 mr-6 transition-all duration-300 hover:scale-105">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <div id="slider-content" class="glass-morphism rounded-2xl shadow-lg p-6 flex flex-col items-center min-w-[200px] min-h-[250px] justify-center">
+                    <div id="slider-content" class="glass-morphism rounded-2xl shadow-lg p-6 flex flex-col items-center min-w-[300px] min-h-[500px] justify-center">
                         <!-- Slider content will be injected by JS -->
                     </div>
                     <button id="slider-next" type="button" class="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full shadow-lg hover:from-orange-500 hover:to-red-500 ml-6 transition-all duration-300 hover:scale-105">
@@ -402,29 +435,29 @@
                 </div>
                 <div class="lg:w-1/2 fade-in" style="animation-delay: 0.2s;">
                     <div class="mb-8">
-                        <h2 class="text-4xl lg:text-5xl font-bold text-red-700 mb-6">
-                            <i class="fas fa-torii-gate text-orange-500 mr-3"></i>
-                            Delivering Festival<br>
-                            <span class="bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">
-                                Excitement!
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6" style="color: var(--text-dark);">
+                            <i class="fas fa-star mr-3" style="color: var(--primary-pink);"></i>
+                            Spreading Kawaii<br>
+                            <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-mint-400 bg-clip-text text-transparent">
+                                Happiness!
                             </span>
                         </h2>
                     </div>
                     <div class="space-y-6">
                         <div class="glass-morphism p-6 rounded-2xl">
                             <div class="flex items-start">
-                                <div class="bg-gradient-to-r from-orange-400 to-red-400 p-3 rounded-full mr-4 flex-shrink-0">
-                                    <i class="fas fa-lantern text-white text-lg"></i>
+                                <div class="p-3 rounded-full mr-4 flex-shrink-0" style="background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));">
+                                    <i class="fas fa-heart text-white text-lg"></i>
                                 </div>
-                                <p class="text-red-700 text-lg leading-relaxed">DaGacha! brings you the fun of Japanese festivals and the thrill of dagashi gacha. Experience the excitement and surprise at home!</p>
+                                <p class="text-lg leading-relaxed" style="color: var(--text-soft);">DaGacha! brings you the ultimate kawaii experience with adorable Japanese dagashi gacha. Discover the joy of cute surprises from the comfort of your home!</p>
                             </div>
                         </div>
                         <div class="glass-morphism p-6 rounded-2xl">
                             <div class="flex items-start">
-                                <div class="bg-gradient-to-r from-pink-400 to-red-400 p-3 rounded-full mr-4 flex-shrink-0">
-                                    <i class="fas fa-users text-white text-lg"></i>
+                                <div class="p-3 rounded-full mr-4 flex-shrink-0" style="background: linear-gradient(45deg, var(--secondary-mint), var(--soft-purple));">
+                                    <i class="fas fa-sparkles text-white text-lg"></i>
                                 </div>
-                                <p class="text-red-700 text-lg leading-relaxed">We carefully select popular dagashi from festivals all over Japan. Spin the gacha with friends and family and enjoy together!</p>
+                                <p class="text-lg leading-relaxed" style="color: var(--text-soft);">We handpick the cutest and most delightful dagashi from all over Japan. Share the kawaii magic with friends and family - every gacha moment is pure happiness!</p>
                             </div>
                         </div>
                     </div>
@@ -439,23 +472,12 @@
             <div class="seigaiha-bg w-full h-full"></div>
         </div>
         <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="flex justify-center items-center gap-4 mb-8 fade-in">
-                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
-                    <circle cx="28" cy="28" r="28" fill="url(#footerGradient)"/>
-                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
-                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
-                    <defs>
-                        <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="text-4xl font-extrabold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">DaGacha!</span>
+            <div class="flex justify-center items-center mb-8 fade-in">
+                <img src="../assets/logo-simple.png" alt="DaGacha!" class="h-16 w-auto max-w-[250px] hover:scale-105 transition-transform duration-300 opacity-90">
             </div>
             <p class="mb-10 text-yellow-100 text-xl leading-relaxed fade-in" style="animation-delay: 0.2s;">
-                <i class="fas fa-dice mr-2"></i>
-                Try your luck with festival dagashi gacha! Let's have fun together!
+                <i class="fas fa-sparkles mr-2"></i>
+                Experience kawaii magic with adorable dagashi gacha! Let's create cute memories together!
                 <i class="fas fa-heart ml-2 text-pink-300"></i>
             </p>
             <div class="flex justify-center space-x-8 mb-12 fade-in" style="animation-delay: 0.4s;">
