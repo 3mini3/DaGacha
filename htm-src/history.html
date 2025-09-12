@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和菓子の歴史 - DaGacha! History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #dc2626;
+            --secondary-gold: #f59e0b;
+            --accent-pink: #f97316;
+            --text-dark: #374151;
+            --bg-light: #fef7f0;
+            --shadow-soft: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fef7f0 0%, #fde68a 25%, #fed7aa 50%, #fef7f0 100%);
+            background-attachment: fixed;
+            line-height: 1.7;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .matsuri-banner {
+            background: linear-gradient(45deg, var(--primary-red) 0%, var(--accent-pink) 50%, var(--secondary-gold) 100%);
+            color: #fff;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .matsuri-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 2rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(to bottom, var(--secondary-gold), var(--accent-pink));
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.25rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--secondary-gold);
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .wagashi-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+        
+        .wagashi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .period-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .heian-period { background: linear-gradient(45deg, #e0e7ff, #c7d2fe); color: #3730a3; }
+        .kamakura-period { background: linear-gradient(45deg, #ecfdf5, #d1fae5); color: #14532d; }
+        .muromachi-period { background: linear-gradient(45deg, #fef3c7, #fde68a); color: #92400e; }
+        .edo-period { background: linear-gradient(45deg, #fce7f3, #fbcfe8); color: #be185d; }
+        .meiji-period { background: linear-gradient(45deg, #fff1f2, #fecaca); color: #991b1b; }
+        
+        @media (max-width: 768px) {
+            .timeline-item {
+                padding-left: 2rem;
+            }
+            .timeline-item::before {
+                left: 0.5rem;
+            }
+            .timeline-item::after {
+                left: 0rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="matsuri-banner text-center relative z-10">
+        <div class="relative z-20">🏮 和菓子の歴史を巡る旅 - Journey Through Wagashi History 🏮</div>
+    </div>
+    <header class="glass-morphism shadow-lg sticky top-0 z-40 border-b border-white/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 fade-in">
+                <!-- DaGacha! Matsuri Logo -->
+                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
+                    <circle cx="28" cy="28" r="28" fill="url(#logoGradient)"/>
+                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
+                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--secondary-gold);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:var(--accent-pink);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="text-3xl font-extrabold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">DaGacha!</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Home</a>
+                <a href="items.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Gacha</a>
+                <a href="about.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">About</a>
+                <a href="history.html" class="text-orange-500 font-bold border-b-2 border-orange-500">History</a>
+                <a href="contact.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-300 via-orange-200 to-red-300 opacity-70"></div>
+        <div class="container mx-auto px-6 text-center z-10 relative">
+            <h1 class="text-5xl md:text-7xl font-bold text-red-700 mb-8 fade-in">
+                <i class="fas fa-scroll text-orange-500 mr-4"></i>
+                和菓子の歴史
+            </h1>
+            <p class="text-2xl md:text-3xl font-semibold text-red-700 fade-in" style="animation-delay: 0.2s;">
+                千年の時を超えて愛され続ける<br>
+                <span class="bg-gradient-to-r from-red-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+                    日本の美味しい宝物
+                </span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
+                <i class="fas fa-clock text-orange-500 mr-3"></i>
+                和菓子の歴史タイムライン
+            </h2>
+
+            <!-- Heian Period -->
+            <div class="timeline-item fade-in">
+                <div class="wagashi-card">
+                    <span class="period-badge heian-period">平安時代 (794-1185)</span>
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">
+                        <i class="fas fa-leaf text-green-500 mr-2"></i>
+                        和菓子のはじまり
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <p class="text-gray-700 mb-4">中国から伝来した唐菓子が和菓子の原点。貴族たちが茶と共に楽しんだ上品な菓子文化が始まりました。</p>
+                            <div class="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border-l-4 border-green-400">
+                                <h4 class="font-bold text-green-700 mb-2">
+                                    <i class="fas fa-lightbulb mr-2"></i>面白いTips
+                                </h4>
+                                <p class="text-sm text-gray-600">「菓子」という言葉は、当時は果物を指していました。現在のような甘い菓子は「唐菓子」と呼ばれていたんです！</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/300x200/E8F5E8/2D5832?text=%E5%94%90%E8%8F%93%E5%AD%90" alt="唐菓子" class="rounded-lg shadow-lg mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kamakura Period -->
+            <div class="timeline-item fade-in">
+                <div class="wagashi-card">
+                    <span class="period-badge kamakura-period">鎌倉時代 (1185-1333)</span>
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">
+                        <i class="fas fa-temple text-orange-500 mr-2"></i>
+                        禅文化と菓子
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div class="text-center md:order-2">
+                            <img src="https://placehold.co/300x200/F0FDF4/166534?text=%E7%A6%85%E8%8F%93%E5%AD%90" alt="禅菓子" class="rounded-lg shadow-lg mx-auto">
+                        </div>
+                        <div>
+                            <p class="text-gray-700 mb-4">禅宗の伝来と共に、シンプルで洗練された菓子文化が発展。この時期に現在の和菓子の基礎となる美意識が形成されました。</p>
+                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-400">
+                                <h4 class="font-bold text-blue-700 mb-2">
+                                    <i class="fas fa-yin-yang mr-2"></i>禅の教え
+                                </h4>
+                                <p class="text-sm text-gray-600">「一期一会」の精神で、その瞬間の美しさを表現する和菓子の哲学がこの時代に生まれました。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Muromachi Period -->
+            <div class="timeline-item fade-in">
+                <div class="wagashi-card">
+                    <span class="period-badge muromachi-period">室町時代 (1336-1573)</span>
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">
+                        <i class="fas fa-leaf text-green-600 mr-2"></i>
+                        茶道の誕生と上生菓子
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <p class="text-gray-700 mb-4">茶道の成立により、季節感を表現する上生菓子が発展。現在見る美しい和菓子の多くがこの時代に原型が作られました。</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-cherry-blossom text-pink-500 mr-2"></i>
+                                    <span><strong>ようかん</strong> - 当初は羊の肉料理でした</span>
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-moon text-yellow-500 mr-2"></i>
+                                    <span><strong>最中</strong> - 源氏物語から名前が付けられました</span>
+                                </li>
+                            </ul>
+                            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                                <h4 class="font-bold text-yellow-700 mb-2">
+                                    <i class="fas fa-surprise mr-2"></i>驚きの事実
+                                </h4>
+                                <p class="text-sm text-gray-600">ようかんは元々中国の羊肉スープ！日本に伝来後、精進料理として小豆を使った甘い菓子に変化しました。</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/300x200/FFFBEB/92400E?text=%E4%B8%8A%E7%94%9F%E8%8F%93%E5%AD%90" alt="上生菓子" class="rounded-lg shadow-lg mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edo Period -->
+            <div class="timeline-item fade-in">
+                <div class="wagashi-card">
+                    <span class="period-badge edo-period">江戸時代 (1603-1868)</span>
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">
+                        <i class="fas fa-city text-purple-600 mr-2"></i>
+                        庶民文化と駄菓子の発展
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div class="text-center md:order-2">
+                            <img src="https://placehold.co/300x200/FDF2F8/BE185D?text=%E9%A7%84%E8%8F%93%E5%AD%90" alt="駄菓子" class="rounded-lg shadow-lg mx-auto">
+                        </div>
+                        <div>
+                            <p class="text-gray-700 mb-4">砂糖の普及により、庶民も甘い菓子を楽しめるように。現在の駄菓子の多くがこの時代に誕生しました。</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-fire text-red-500 mr-2"></i>
+                                    <span><strong>せんべい</strong> - 草加せんべいが有名に</span>
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-star text-gold-500 mr-2"></i>
+                                    <span><strong>金平糖</strong> - ポルトガルから伝来</span>
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-candy-cane text-pink-500 mr-2"></i>
+                                    <span><strong>かりんとう</strong> - 庶民のおやつとして定着</span>
+                                </li>
+                            </ul>
+                            <div class="bg-gradient-to-r from-pink-50 to-red-50 p-4 rounded-lg border-l-4 border-pink-400">
+                                <h4 class="font-bold text-pink-700 mb-2">
+                                    <i class="fas fa-globe mr-2"></i>国際的な影響
+                                </h4>
+                                <p class="text-sm text-gray-600">金平糖は南蛮貿易でもたらされ、織田信長も食べたとされています。当時は超高級品でした！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meiji Period -->
+            <div class="timeline-item fade-in">
+                <div class="wagashi-card">
+                    <span class="period-badge meiji-period">明治時代以降 (1868-現在)</span>
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">
+                        <i class="fas fa-rocket text-blue-600 mr-2"></i>
+                        近代化と新しい和菓子
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <p class="text-gray-700 mb-4">西洋文化の流入により、新しい製法や材料が導入。伝統を守りながらも革新的な和菓子が次々と生まれました。</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-castle text-yellow-600 mr-2"></i>
+                                    <span><strong>カステラ</strong> - 長崎の名物として完成</span>
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-bridge text-purple-600 mr-2"></i>
+                                    <span><strong>八つ橋</strong> - 京都の代表的な土産物に</span>
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-industry text-gray-600 mr-2"></i>
+                                    <span><strong>大量生産</strong> - 機械化により全国に普及</span>
+                                </li>
+                            </ul>
+                            <div class="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-lg border-l-4 border-red-400">
+                                <h4 class="font-bold text-red-700 mb-2">
+                                    <i class="fas fa-heart mr-2"></i>現代への継承
+                                </h4>
+                                <p class="text-sm text-gray-600">現在も職人たちが伝統技法を大切にしながら、新しいアイデアを取り入れた和菓子を作り続けています。</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/300x200/FEF2F2/991B1B?text=%E7%8F%BE%E4%BB%A3%E5%92%8C%E8%8F%93%E5%AD%90" alt="現代和菓子" class="rounded-lg shadow-lg mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wagashi Categories Section -->
+    <section class="py-20 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
+                <i class="fas fa-layer-group text-orange-500 mr-3"></i>
+                和菓子の種類
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- 生菓子 -->
+                <div class="wagashi-card fade-in">
+                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
+                        <i class="fas fa-droplet text-blue-500 mr-3"></i>
+                        生菓子（なまがし）
+                    </h3>
+                    <p class="text-gray-700 mb-4">水分が多く、日持ちしない代わりに繊細で美しい見た目が特徴。茶道で重宝されます。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-leaf text-green-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">練り切り</span>
+                                <p class="text-sm text-gray-600">白あんと求肥で作る、最も芸術性の高い和菓子</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-circle text-pink-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">大福</span>
+                                <p class="text-sm text-gray-600">もち米で作った皮であんを包んだ代表的な生菓子</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 半生菓子 -->
+                <div class="wagashi-card fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
+                        <i class="fas fa-balance-scale text-yellow-500 mr-3"></i>
+                        半生菓子（はんなまがし）
+                    </h3>
+                    <p class="text-gray-700 mb-4">適度な水分で、数日から数週間保存可能。贈り物としても人気です。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-square text-purple-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">ようかん</span>
+                                <p class="text-sm text-gray-600">小豆あんを寒天で固めた上品な甘さの菓子</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-moon text-orange-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">最中</span>
+                                <p class="text-sm text-gray-600">もち米の皮にあんを挟んだ、パリッとした食感</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-cube text-brown-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">カステラ</span>
+                                <p class="text-sm text-gray-600">卵とはちみつの優しい甘さが特徴のスポンジ菓子</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 干菓子 -->
+                <div class="wagashi-card fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
+                        <i class="fas fa-sun text-orange-500 mr-3"></i>
+                        干菓子（ひがし）
+                    </h3>
+                    <p class="text-gray-700 mb-4">水分が少なく長期保存可能。日常のお菓子として親しまれています。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-circle-notch text-brown-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">せんべい</span>
+                                <p class="text-sm text-gray-600">米を原料とした香ばしい焼き菓子</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-star text-gold-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">金平糖</span>
+                                <p class="text-sm text-gray-600">砂糖の結晶で作られた美しい星型の菓子</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-bridge text-purple-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">八つ橋</span>
+                                <p class="text-sm text-gray-600">京都名物のニッキ風味の薄焼き菓子</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 駄菓子 -->
+                <div class="wagashi-card fade-in" style="animation-delay: 0.6s;">
+                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
+                        <i class="fas fa-candy-cane text-pink-500 mr-3"></i>
+                        駄菓子（だがし）
+                    </h3>
+                    <p class="text-gray-700 mb-4">庶民的で手頃な価格の菓子。子供から大人まで愛される親しみやすいお菓子です。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-fire text-red-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">かりんとう</span>
+                                <p class="text-sm text-gray-600">小麦粉を揚げて黒糖をからめた昔ながらの味</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-candy text-rainbow-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">飴菓子</span>
+                                <p class="text-sm text-gray-600">様々な味と形で楽しめる砂糖菓子</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Facts Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                和菓子の面白い豆知識
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="wagashi-card text-center fade-in">
+                    <div class="text-4xl mb-4">🌸</div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">季節の表現</h3>
+                    <p class="text-gray-700">和菓子は季節を先取りして作られます。桜の和菓子は桜が咲く前に登場し、季節の移ろいを感じさせてくれます。</p>
+                </div>
+                
+                <div class="wagashi-card text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">五感で味わう</h3>
+                    <p class="text-gray-700">和菓子は味だけでなく、見た目、香り、食感、そして菓子の名前から想像する情景まで、五感すべてで楽しむものです。</p>
+                </div>
+                
+                <div class="wagashi-card text-center fade-in" style="animation-delay: 0.4s;">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-red-700 mb-3">文学との関係</h3>
+                    <p class="text-gray-700">多くの和菓子の名前は古典文学から取られています。「最中」は源氏物語の一節「もなかの月」から名付けられました。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white pt-20 pb-12 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div style="background-image: radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.1) 20%, transparent 20%), radial-gradient(circle at 75% 75%, rgba(220, 38, 38, 0.1) 20%, transparent 20%); background-size: 100px 100px;" class="w-full h-full"></div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="flex justify-center items-center gap-4 mb-8 fade-in">
+                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
+                    <circle cx="28" cy="28" r="28" fill="url(#footerGradient)"/>
+                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
+                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
+                    <defs>
+                        <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="text-4xl font-extrabold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">DaGacha!</span>
+            </div>
+            <p class="mb-10 text-yellow-100 text-xl leading-relaxed fade-in" style="animation-delay: 0.2s;">
+                <i class="fas fa-history mr-2"></i>
+                千年の歴史と伝統を味わう和菓子の世界へようこそ！
+                <i class="fas fa-heart ml-2 text-pink-300"></i>
+            </p>
+            <div class="border-t border-white/20 pt-8 fade-in" style="animation-delay: 0.4s;">
+                <p class="text-yellow-200 flex items-center justify-center gap-2">
+                    <i class="fas fa-copyright"></i>
+                    <span>2025 DaGacha! All Rights Reserved.</span>
+                    <i class="fas fa-heart text-pink-300"></i>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
