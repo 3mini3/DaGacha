@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>和菓子の歴史 - DaGacha! History</title>
+    <title>駄菓子の歴史 - DaGacha! History</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary-red: #dc2626;
-            --secondary-gold: #f59e0b;
-            --accent-pink: #f97316;
-            --text-dark: #374151;
-            --bg-light: #fef7f0;
-            --shadow-soft: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --primary-pink: #f8bbd9;
+            --secondary-mint: #a7e6d7;
+            --accent-peach: #ffd4cc;
+            --soft-purple: #e0c3fc;
+            --cream-white: #fef9f5;
+            --text-soft: #6b5b73;
+            --text-dark: #4a3c56;
+            --shadow-soft: 0 20px 25px -5px rgba(171, 126, 168, 0.15), 0 10px 10px -5px rgba(171, 126, 168, 0.08);
+            --shadow-cute: 0 8px 32px rgba(248, 187, 217, 0.3);
         }
         
         * {
@@ -22,16 +26,18 @@
         }
         
         body {
-            font-family: 'Noto Sans JP', 'Inter', sans-serif;
-            background: linear-gradient(135deg, #fef7f0 0%, #fde68a 25%, #fed7aa 50%, #fef7f0 100%);
+            font-family: 'M PLUS Rounded 1c', 'Klee One', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 20%, #e8f5e8 40%, #fff3e0 60%, #fce4ec 80%, #f8bbd9 100%);
             background-attachment: fixed;
             line-height: 1.7;
+            color: var(--text-soft);
         }
         
         .glass-morphism {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 245, 250, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(248, 187, 217, 0.3);
+            box-shadow: var(--shadow-cute);
         }
         
         .card-hover {
@@ -43,19 +49,20 @@
             box-shadow: var(--shadow-soft);
         }
         
-        .matsuri-banner {
-            background: linear-gradient(45deg, var(--primary-red) 0%, var(--accent-pink) 50%, var(--secondary-gold) 100%);
-            color: #fff;
+        .kawaii-banner {
+            background: linear-gradient(45deg, var(--primary-pink) 0%, var(--accent-peach) 50%, var(--secondary-mint) 100%);
+            color: var(--text-dark);
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             font-weight: 800;
             letter-spacing: 0.05em;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.7);
             padding: 1rem 0;
             position: relative;
             overflow: hidden;
+            border-bottom: 3px solid var(--primary-pink);
         }
         
-        .matsuri-banner::before {
+        .kawaii-banner::before {
             content: '';
             position: absolute;
             top: 0;
@@ -149,6 +156,43 @@
         .edo-period { background: linear-gradient(45deg, #fce7f3, #fbcfe8); color: #be185d; }
         .meiji-period { background: linear-gradient(45deg, #fff1f2, #fecaca); color: #991b1b; }
         
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(248, 187, 217, 0.6), 6px 6px 0 rgba(167, 230, 215, 0.4);
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .seigaiha-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(248, 187, 217, 0.15) 20%, transparent 20%),
+                radial-gradient(circle at 75% 75%, rgba(167, 230, 215, 0.15) 20%, transparent 20%);
+            background-size: 80px 80px;
+        }
+
+        .header-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .header-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 120px;
+        }
+
+        .header-wave .shape-fill {
+            fill: var(--cream-white);
+        }
+
         @media (max-width: 768px) {
             .timeline-item {
                 padding-left: 2rem;
@@ -159,225 +203,245 @@
             .timeline-item::after {
                 left: 0rem;
             }
+            .hero-title {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Header -->
-    <div class="matsuri-banner text-center relative z-10">
-        <div class="relative z-20">🏮 和菓子の歴史を巡る旅 - Journey Through Wagashi History 🏮</div>
+    <div class="kawaii-banner text-center relative z-10">
+        <div class="relative z-20">✨ Kawaii Dagashi Time! Discover the history of cute Japanese snacks! ✨</div>
     </div>
     <header class="glass-morphism shadow-lg sticky top-0 z-40 border-b border-white/20">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3 fade-in">
-                <!-- DaGacha! Matsuri Logo -->
-                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
-                    <circle cx="28" cy="28" r="28" fill="url(#logoGradient)"/>
-                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
-                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:var(--secondary-gold);stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:var(--accent-pink);stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="text-3xl font-extrabold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent">DaGacha!</span>
+            <a href="#home" class="flex items-center fade-in">
+                <!-- DaGacha! Simple Logo -->
+                <img src="../assets/logo-simple.png" alt="DaGacha!" class="h-12 w-auto max-w-[200px] hover:scale-105 transition-transform duration-300">
             </a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Home</a>
-                <a href="items.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Gacha</a>
-                <a href="about.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">About</a>
-                <a href="history.html" class="text-orange-500 font-bold border-b-2 border-orange-500">History</a>
-                <a href="contact.html" class="text-gray-700 hover:text-orange-500 transition-all duration-300 font-semibold hover:scale-105">Contact</a>
+                <a href="index.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Home</a>
+                <a href="items.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Gacha</a>
+                <a href="about.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">About</a>
+                <a href="history.html" class="font-bold border-b-2 border-current" style="color: var(--primary-pink);">History</a>
+                <a href="contact.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Contact</a>
             </nav>
+            <button id="cart-button" class="relative transition-all duration-300 hover:scale-110 p-2" style="color: var(--text-soft);">
+                <i class="fas fa-shopping-cart fa-lg" style="color: var(--text-soft);"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold shadow-lg" style="background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));">0</span>
+            </button>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden py-20">
-        <div class="absolute inset-0 bg-gradient-to-br from-amber-300 via-orange-200 to-red-300 opacity-70"></div>
-        <div class="container mx-auto px-6 text-center z-10 relative">
-            <h1 class="text-5xl md:text-7xl font-bold text-red-700 mb-8 fade-in">
-                <i class="fas fa-scroll text-orange-500 mr-4"></i>
-                和菓子の歴史
-            </h1>
-            <p class="text-2xl md:text-3xl font-semibold text-red-700 fade-in" style="animation-delay: 0.2s;">
-                千年の時を超えて愛され続ける<br>
-                <span class="bg-gradient-to-r from-red-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
-                    日本の美味しい宝物
+    <section id="home" class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-300 via-orange-200 to-red-300"></div>
+        <div class="seigaiha-bg absolute inset-0 opacity-30"></div>
+        <div class="container mx-auto px-6 py-20 text-center z-10 relative">
+            <h1 class="hero-title fade-in" style="color: var(--text-dark);">
+                Kawaii Dagashi<br>
+                <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-mint-400 bg-clip-text text-transparent">
+                    History Time!
                 </span>
+            </h1>
+            <p class="text-2xl md:text-3xl font-bold mb-8 fade-in" style="color: var(--text-soft); animation-delay: 0.2s;">
+                <span class="inline-block animate-pulse">🌸</span>
+                Discover the Sweet Story!
+                <span class="inline-block animate-pulse">💕</span>
+                <br>
+                Learn about your favorite Japanese snacks!
             </p>
+        </div>
+        <div class="header-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,2V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
         </div>
     </section>
 
-    <!-- Timeline Section -->
+    <!-- Dagashi History Section -->
     <section class="container mx-auto px-6 py-20">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
-                <i class="fas fa-clock text-orange-500 mr-3"></i>
-                和菓子の歴史タイムライン
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--text-dark);">
+                <i class="fas fa-heart mr-3" style="color: var(--primary-pink);"></i>
+                駄菓子の歴史と物語
             </h2>
 
-            <!-- Heian Period -->
+            <!-- Umaibo -->
             <div class="timeline-item fade-in">
-                <div class="wagashi-card">
-                    <span class="period-badge heian-period">平安時代 (794-1185)</span>
-                    <h3 class="text-2xl font-bold text-red-700 mb-4">
-                        <i class="fas fa-leaf text-green-500 mr-2"></i>
-                        和菓子のはじまり
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-8">
+                    <div class="text-center mb-6">
+                        <img src="https://placehold.co/150x150/E11D48/fff?text=うまい棒" alt="うまい棒" class="rounded-xl shadow-lg mx-auto mb-4">
+                        <span class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-full font-bold text-sm">塩っぽい系</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-dark);">
+                        <i class="fas fa-star mr-2" style="color: var(--primary-pink);"></i>
+                        うまい棒
                     </h3>
-                    <div class="grid md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <p class="text-gray-700 mb-4">中国から伝来した唐菓子が和菓子の原点。貴族たちが茶と共に楽しんだ上品な菓子文化が始まりました。</p>
-                            <div class="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border-l-4 border-green-400">
-                                <h4 class="font-bold text-green-700 mb-2">
-                                    <i class="fas fa-lightbulb mr-2"></i>面白いTips
-                                </h4>
-                                <p class="text-sm text-gray-600">「菓子」という言葉は、当時は果物を指していました。現在のような甘い菓子は「唐菓子」と呼ばれていたんです！</p>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <img src="https://placehold.co/300x200/E8F5E8/2D5832?text=%E5%94%90%E8%8F%93%E5%AD%90" alt="唐菓子" class="rounded-lg shadow-lg mx-auto">
-                        </div>
+                    <p class="text-lg mb-6 leading-relaxed text-center" style="color: var(--text-soft);">日本の駄菓子界のキング！低価格で味の種類が豊富なコーンスナックです。子供から大人まで、みんなが大好き！</p>
+                    <div class="bg-gradient-to-r from-orange-50 to-yellow-50 p-4 rounded-lg border-l-4 border-orange-400">
+                        <h4 class="font-bold text-orange-700 mb-2">
+                            <i class="fas fa-lightbulb mr-2"></i>豆知識
+                        </h4>
+                        <p class="text-sm text-gray-600">うまい棒は1979年に登場！現在までに100種類以上の味が登場しています。一番人気はコーンポタージュ味！</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Kamakura Period -->
+            <!-- Chocolate series -->
             <div class="timeline-item fade-in">
-                <div class="wagashi-card">
-                    <span class="period-badge kamakura-period">鎌倉時代 (1185-1333)</span>
-                    <h3 class="text-2xl font-bold text-red-700 mb-4">
-                        <i class="fas fa-temple text-orange-500 mr-2"></i>
-                        禅文化と菓子
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-8">
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div class="text-center">
+                            <img src="https://placehold.co/120x120/8B4513/fff?text=チロル" alt="チロルチョコ" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-sm font-semibold" style="color: var(--text-soft);">チロルチョコ</span>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/120x120/8B4513/fff?text=ココア" alt="ココアシガレット" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-sm font-semibold" style="color: var(--text-soft);">ココアシガレット</span>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/120x120/DC143C/fff?text=コーラ" alt="ミニコーラ" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-sm font-semibold" style="color: var(--text-soft);">ミニコーラ</span>
+                        </div>
+                    </div>
+                    <span class="bg-gradient-to-r from-amber-400 to-brown-400 text-white px-4 py-2 rounded-full font-bold text-sm mb-4 inline-block">チョコレート系</span>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text-dark);">
+                        <i class="fas fa-heart mr-2" style="color: var(--primary-pink);"></i>
+                        チョコレート駄菓子の世界
                     </h3>
-                    <div class="grid md:grid-cols-2 gap-6 items-center">
-                        <div class="text-center md:order-2">
-                            <img src="https://placehold.co/300x200/F0FDF4/166534?text=%E7%A6%85%E8%8F%93%E5%AD%90" alt="禅菓子" class="rounded-lg shadow-lg mx-auto">
-                        </div>
-                        <div>
-                            <p class="text-gray-700 mb-4">禅宗の伝来と共に、シンプルで洗練された菓子文化が発展。この時期に現在の和菓子の基礎となる美意識が形成されました。</p>
-                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-400">
-                                <h4 class="font-bold text-blue-700 mb-2">
-                                    <i class="fas fa-yin-yang mr-2"></i>禅の教え
-                                </h4>
-                                <p class="text-sm text-gray-600">「一期一会」の精神で、その瞬間の美しさを表現する和菓子の哲学がこの時代に生まれました。</p>
-                            </div>
-                        </div>
+                    <p class="text-lg mb-6 leading-relaxed" style="color: var(--text-soft);">チョコレートの魅力が詰まった駄菓子たち。チロルチョコは小さくても本格的な味で、ココアシガレットは大人の気分を味わえます。</p>
+                    <div class="bg-gradient-to-r from-brown-50 to-amber-50 p-4 rounded-lg border-l-4 border-brown-400">
+                        <h4 class="font-bold text-brown-700 mb-2">
+                            <i class="fas fa-surprise mr-2"></i>おもしろ豆知識
+                        </h4>
+                        <p class="text-sm text-gray-600">チロルチョコは1962年登場！オーストリアのチロル地方に由来しています。ココアシガレットは、子供が大人の真似をして楽しめるように作られました。</p>
                     </div>
                 </div>
             </div>
 
             <!-- Muromachi Period -->
             <div class="timeline-item fade-in">
-                <div class="wagashi-card">
-                    <span class="period-badge muromachi-period">室町時代 (1336-1573)</span>
-                    <h3 class="text-2xl font-bold text-red-700 mb-4">
-                        <i class="fas fa-leaf text-green-600 mr-2"></i>
-                        茶道の誕生と上生菓子
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-6 items-center">
-                        <div>
-                            <p class="text-gray-700 mb-4">茶道の成立により、季節感を表現する上生菓子が発展。現在見る美しい和菓子の多くがこの時代に原型が作られました。</p>
-                            <ul class="space-y-2 mb-4">
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-cherry-blossom text-pink-500 mr-2"></i>
-                                    <span><strong>ようかん</strong> - 当初は羊の肉料理でした</span>
-                                </li>
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-moon text-yellow-500 mr-2"></i>
-                                    <span><strong>最中</strong> - 源氏物語から名前が付けられました</span>
-                                </li>
-                            </ul>
-                            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border-l-4 border-yellow-400">
-                                <h4 class="font-bold text-yellow-700 mb-2">
-                                    <i class="fas fa-surprise mr-2"></i>驚きの事実
-                                </h4>
-                                <p class="text-sm text-gray-600">ようかんは元々中国の羊肉スープ！日本に伝来後、精進料理として小豆を使った甘い菓子に変化しました。</p>
-                            </div>
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-8">
+                    <div class="grid md:grid-cols-4 gap-4 mb-6">
+                        <div class="text-center">
+                            <img src="https://placehold.co/100x100/87CEEB/333?text=ラムネ" alt="くっぴーラムネ" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-xs font-semibold" style="color: var(--text-soft);">くっぴーラムネ</span>
                         </div>
                         <div class="text-center">
-                            <img src="https://placehold.co/300x200/FFFBEB/92400E?text=%E4%B8%8A%E7%94%9F%E8%8F%93%E5%AD%90" alt="上生菓子" class="rounded-lg shadow-lg mx-auto">
+                            <img src="https://placehold.co/100x100/FFD700/333?text=フエ" alt="フエラムネ" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-xs font-semibold" style="color: var(--text-soft);">フエラムネ</span>
                         </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/100x100/654321/fff?text=バット" alt="チョコバット" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-xs font-semibold" style="color: var(--text-soft);">チョコバット</span>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://placehold.co/100x100/DEB887/333?text=きなこ" alt="きなこ棒" class="rounded-xl shadow-lg mx-auto mb-2">
+                            <span class="text-xs font-semibold" style="color: var(--text-soft);">きなこ棒</span>
+                        </div>
+                    </div>
+                    <span class="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-4 py-2 rounded-full font-bold text-sm mb-4 inline-block">砂糖系</span>
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--text-dark);">
+                        <i class="fas fa-candy-cane mr-2" style="color: var(--primary-pink);"></i>
+                        スイーツな砂糖菓子
+                    </h3>
+                    <p class="text-lg mb-6 leading-relaxed" style="color: var(--text-soft);">子供たちが大好きな甘い砂糖菓子たち。ラムネのしゅわしゅわ感、チョコバットのカリカリ感、きなこ棒の優しい甘さが特徴です。</p>
+                    <div class="bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-lg border-l-4 border-pink-400">
+                        <h4 class="font-bold text-pink-700 mb-2">
+                            <i class="fas fa-magic mr-2"></i>特別な体験
+                        </h4>
+                        <p class="text-sm text-gray-600">フエラムネは後ろの穴から笛のように音が鳴らせる楽しいお菓子！チョコバットはビッグリーグカード付きでコレクションも楽しめる！</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Edo Period -->
+            <!-- Salty series -->
             <div class="timeline-item fade-in">
-                <div class="wagashi-card">
-                    <span class="period-badge edo-period">江戸時代 (1603-1868)</span>
-                    <h3 class="text-2xl font-bold text-red-700 mb-4">
-                        <i class="fas fa-city text-purple-600 mr-2"></i>
-                        庶民文化と駄菓子の発展
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-6 items-center">
-                        <div class="text-center md:order-2">
-                            <img src="https://placehold.co/300x200/FDF2F8/BE185D?text=%E9%A7%84%E8%8F%93%E5%AD%90" alt="駄菓子" class="rounded-lg shadow-lg mx-auto">
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <div class="text-center">
+                                    <img src="https://placehold.co/80x80/32CD32/333?text=キャベツ" alt="キャベツ太郎" class="rounded-xl shadow-lg mx-auto mb-1">
+                                    <span class="text-xs" style="color: var(--text-soft);">キャベツ太郎</span>
+                                </div>
+                                <div class="text-center">
+                                    <img src="https://placehold.co/80x80/FF6347/fff?text=ベビー" alt="ベビースター" class="rounded-xl shadow-lg mx-auto mb-1">
+                                    <span class="text-xs" style="color: var(--text-soft);">ベビースター</span>
+                                </div>
+                                <div class="text-center">
+                                    <img src="https://placehold.co/80x80/D2691E/fff?text=カツ" alt="ビッグカツ" class="rounded-xl shadow-lg mx-auto mb-1">
+                                    <span class="text-xs" style="color: var(--text-soft);">ビッグカツ</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="text-center">
+                                    <img src="https://placehold.co/80x80/8B4513/fff?text=蒲焼" alt="蒲焼さん太郎" class="rounded-xl shadow-lg mx-auto mb-1">
+                                    <span class="text-xs" style="color: var(--text-soft);">蒲焼さん太郎</span>
+                                </div>
+                                <div class="text-center">
+                                    <img src="https://placehold.co/80x80/F4A460/333?text=焼き" alt="どんどん焼き" class="rounded-xl shadow-lg mx-auto mb-1">
+                                    <span class="text-xs" style="color: var(--text-soft);">どんどん焼き</span>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <p class="text-gray-700 mb-4">砂糖の普及により、庶民も甘い菓子を楽しめるように。現在の駄菓子の多くがこの時代に誕生しました。</p>
-                            <ul class="space-y-2 mb-4">
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-fire text-red-500 mr-2"></i>
-                                    <span><strong>せんべい</strong> - 草加せんべいが有名に</span>
-                                </li>
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-star text-gold-500 mr-2"></i>
-                                    <span><strong>金平糖</strong> - ポルトガルから伝来</span>
-                                </li>
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-candy-cane text-pink-500 mr-2"></i>
-                                    <span><strong>かりんとう</strong> - 庶民のおやつとして定着</span>
-                                </li>
-                            </ul>
-                            <div class="bg-gradient-to-r from-pink-50 to-red-50 p-4 rounded-lg border-l-4 border-pink-400">
-                                <h4 class="font-bold text-pink-700 mb-2">
-                                    <i class="fas fa-globe mr-2"></i>国際的な影響
+                            <span class="bg-gradient-to-r from-blue-400 to-green-400 text-white px-4 py-2 rounded-full font-bold text-sm mb-4 inline-block">塩っぽい系</span>
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--text-dark);">
+                                <i class="fas fa-utensils mr-2" style="color: var(--primary-pink);"></i>
+                                しょっぱいスナック
+                            </h3>
+                            <p class="text-lg mb-4 leading-relaxed" style="color: var(--text-soft);">甘いお菓子だけではない！しょっぱい味が特徴の駄菓子たち。スナックのような食感で、おやつ時間を楽しくしてくれます。</p>
+                            <div class="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg border-l-4 border-blue-400">
+                                <h4 class="font-bold text-blue-700 mb-2">
+                                    <i class="fas fa-crown mr-2"></i>人気の秘密
                                 </h4>
-                                <p class="text-sm text-gray-600">金平糖は南蛮貿易でもたらされ、織田信長も食べたとされています。当時は超高級品でした！</p>
+                                <p class="text-sm text-gray-600">ビッグカツはカツレツのサクサク感を完全再現！蒲焼さん太郎はコシのあるスパイシーな味がクセになります。</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Meiji Period -->
+            <!-- Spicy series -->
             <div class="timeline-item fade-in">
-                <div class="wagashi-card">
-                    <span class="period-badge meiji-period">明治時代以降 (1868-現在)</span>
-                    <h3 class="text-2xl font-bold text-red-700 mb-4">
-                        <i class="fas fa-rocket text-blue-600 mr-2"></i>
-                        近代化と新しい和菓子
-                    </h3>
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-8">
                     <div class="grid md:grid-cols-2 gap-6 items-center">
+                        <div class="text-center">
+                            <img src="https://placehold.co/200x150/FF4500/fff?text=タラタラ" alt="タラタラしてんじゃね～よ" class="rounded-xl shadow-lg mx-auto mb-4">
+                            <span class="bg-gradient-to-r from-red-400 to-orange-400 text-white px-4 py-2 rounded-full font-bold text-sm mb-4 inline-block">辛い系</span>
+                        </div>
                         <div>
-                            <p class="text-gray-700 mb-4">西洋文化の流入により、新しい製法や材料が導入。伝統を守りながらも革新的な和菓子が次々と生まれました。</p>
-                            <ul class="space-y-2 mb-4">
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-castle text-yellow-600 mr-2"></i>
-                                    <span><strong>カステラ</strong> - 長崎の名物として完成</span>
-                                </li>
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-bridge text-purple-600 mr-2"></i>
-                                    <span><strong>八つ橋</strong> - 京都の代表的な土産物に</span>
-                                </li>
-                                <li class="flex items-center text-gray-700">
-                                    <i class="fas fa-industry text-gray-600 mr-2"></i>
-                                    <span><strong>大量生産</strong> - 機械化により全国に普及</span>
-                                </li>
-                            </ul>
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--text-dark);">
+                                <i class="fas fa-fire mr-2" style="color: var(--primary-pink);"></i>
+                                スパイシー駄菓子
+                            </h3>
+                            <p class="text-lg mb-4 leading-relaxed" style="color: var(--text-soft);">辛いものが好きな方にはたまらないスパイシーな駄菓子たち。「タラタラしてんじゃね～よ」はインパクトのある名前でも有名です。</p>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                                    <i class="fas fa-fire text-red-500 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">タラタラしてんじゃね～よ</span>
+                                        <p class="text-sm text-gray-600">イカの旨味とスパイシーな味がクセになる</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                                    <i class="fas fa-pepper-hot text-red-600 mr-3"></i>
+                                    <div>
+                                        <span class="font-semibold">さん太郎シリーズ</span>
+                                        <p class="text-sm text-gray-600">焼肉、酢だこなど辛い味のバリエーション</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-lg border-l-4 border-red-400">
                                 <h4 class="font-bold text-red-700 mb-2">
-                                    <i class="fas fa-heart mr-2"></i>現代への継承
+                                    <i class="fas fa-exclamation mr-2"></i>注意
                                 </h4>
-                                <p class="text-sm text-gray-600">現在も職人たちが伝統技法を大切にしながら、新しいアイデアを取り入れた和菓子を作り続けています。</p>
+                                <p class="text-sm text-gray-600">辛いものが苦手な方は無理しないでくださいね！でも一度食べるとハマる人が多いのも事実です。</p>
                             </div>
-                        </div>
-                        <div class="text-center">
-                            <img src="https://placehold.co/300x200/FEF2F2/991B1B?text=%E7%8F%BE%E4%BB%A3%E5%92%8C%E8%8F%93%E5%AD%90" alt="現代和菓子" class="rounded-lg shadow-lg mx-auto">
                         </div>
                     </div>
                 </div>
@@ -385,124 +449,124 @@
         </div>
     </section>
 
-    <!-- Wagashi Categories Section -->
+    <!-- Dagashi Categories Section -->
     <section class="py-20 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
-                <i class="fas fa-layer-group text-orange-500 mr-3"></i>
-                和菓子の種類
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--text-dark);">
+                <i class="fas fa-layer-group mr-3" style="color: var(--primary-pink);"></i>
+                駄菓子の種類
             </h2>
             
             <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                <!-- 生菓子 -->
-                <div class="wagashi-card fade-in">
-                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                        <i class="fas fa-droplet text-blue-500 mr-3"></i>
-                        生菓子（なまがし）
+                <!-- 砂糖系 -->
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center" style="color: var(--text-dark);">
+                        <i class="fas fa-candy-cane mr-3" style="color: var(--primary-pink);"></i>
+                        砂糖系駄菓子
                     </h3>
-                    <p class="text-gray-700 mb-4">水分が多く、日持ちしない代わりに繊細で美しい見た目が特徴。茶道で重宝されます。</p>
+                    <p class="mb-4" style="color: var(--text-soft);">甘くておいしい砂糖菓子たち。子供から大人まで、みんなが大好きなカテゴリーです。</p>
                     <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-circle text-blue-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">ラムネ系</span>
+                                <p class="text-sm text-gray-600">くっぴーラムネ、フエラムネなどしゅわしゅわ系</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-square text-brown-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">棒系お菓子</span>
+                                <p class="text-sm text-gray-600">きなこ棒、チョコバットなど甘くて本格的</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- チョコレート系 -->
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center" style="color: var(--text-dark);">
+                        <i class="fas fa-heart mr-3" style="color: var(--primary-pink);"></i>
+                        チョコレート系駄菓子
+                    </h3>
+                    <p class="mb-4" style="color: var(--text-soft);">チョコレートの美味しさを手軽に楽しめる駄菓子たち。小さくても本格的な味です。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-square text-brown-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">チロルチョコ</span>
+                                <p class="text-sm text-gray-600">小さくても本格的なチョコレートの味</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-cigarette text-gray-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">ココアシガレット</span>
+                                <p class="text-sm text-gray-600">大人の気分を味わえるユニークなお菓子</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-tint text-red-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">ミニコーラ</span>
+                                <p class="text-sm text-gray-600">コーラ味のチョコレートグミ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 塩っぽい系 -->
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center" style="color: var(--text-dark);">
+                        <i class="fas fa-utensils mr-3" style="color: var(--primary-pink);"></i>
+                        塩っぽい系駄菓子
+                    </h3>
+                    <p class="mb-4" style="color: var(--text-soft);">しょっぱい味が特徴のスナック系駄菓子。食べ始めると止まらないおいしさです。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
+                            <i class="fas fa-drumstick-bite text-orange-500 mr-3"></i>
+                            <div>
+                                <span class="font-semibold">うまい棒</span>
+                                <p class="text-sm text-gray-600">日本の駄菓子界のキング、コーンスナック</p>
+                            </div>
+                        </div>
                         <div class="flex items-center p-3 bg-white/50 rounded-lg">
                             <i class="fas fa-leaf text-green-500 mr-3"></i>
                             <div>
-                                <span class="font-semibold">練り切り</span>
-                                <p class="text-sm text-gray-600">白あんと求肥で作る、最も芸術性の高い和菓子</p>
+                                <span class="font-semibold">キャベツ太郎</span>
+                                <p class="text-sm text-gray-600">キャベツの風味を楽しめるスナック</p>
                             </div>
                         </div>
                         <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-circle text-pink-500 mr-3"></i>
+                            <i class="fas fa-fish text-brown-500 mr-3"></i>
                             <div>
-                                <span class="font-semibold">大福</span>
-                                <p class="text-sm text-gray-600">もち米で作った皮であんを包んだ代表的な生菓子</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 半生菓子 -->
-                <div class="wagashi-card fade-in" style="animation-delay: 0.2s;">
-                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                        <i class="fas fa-balance-scale text-yellow-500 mr-3"></i>
-                        半生菓子（はんなまがし）
-                    </h3>
-                    <p class="text-gray-700 mb-4">適度な水分で、数日から数週間保存可能。贈り物としても人気です。</p>
-                    <div class="space-y-3">
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-square text-purple-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">ようかん</span>
-                                <p class="text-sm text-gray-600">小豆あんを寒天で固めた上品な甘さの菓子</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-moon text-orange-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">最中</span>
-                                <p class="text-sm text-gray-600">もち米の皮にあんを挟んだ、パリッとした食感</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-cube text-brown-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">カステラ</span>
-                                <p class="text-sm text-gray-600">卵とはちみつの優しい甘さが特徴のスポンジ菓子</p>
+                                <span class="font-semibold">蒲焼さん太郎</span>
+                                <p class="text-sm text-gray-600">魚の蒲焼き風味のスパイシーな味</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 干菓子 -->
-                <div class="wagashi-card fade-in" style="animation-delay: 0.4s;">
-                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                        <i class="fas fa-sun text-orange-500 mr-3"></i>
-                        干菓子（ひがし）
+                <!-- 辛い系 -->
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 fade-in" style="animation-delay: 0.6s;">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center" style="color: var(--text-dark);">
+                        <i class="fas fa-fire mr-3" style="color: var(--primary-pink);"></i>
+                        辛い系駄菓子
                     </h3>
-                    <p class="text-gray-700 mb-4">水分が少なく長期保存可能。日常のお菓子として親しまれています。</p>
+                    <p class="mb-4" style="color: var(--text-soft);">辛いもの好きにはたまらないスパイシーな駄菓子たち。一度食べるとクセになります。</p>
                     <div class="space-y-3">
                         <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-circle-notch text-brown-500 mr-3"></i>
+                            <i class="fas fa-pepper-hot text-red-500 mr-3"></i>
                             <div>
-                                <span class="font-semibold">せんべい</span>
-                                <p class="text-sm text-gray-600">米を原料とした香ばしい焼き菓子</p>
+                                <span class="font-semibold">タラタラしてんじゃね～よ</span>
+                                <p class="text-sm text-gray-600">インパクトのある名前とスパイシーな味</p>
                             </div>
                         </div>
                         <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-star text-gold-500 mr-3"></i>
+                            <i class="fas fa-fire-flame-curved text-orange-500 mr-3"></i>
                             <div>
-                                <span class="font-semibold">金平糖</span>
-                                <p class="text-sm text-gray-600">砂糖の結晶で作られた美しい星型の菓子</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-bridge text-purple-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">八つ橋</span>
-                                <p class="text-sm text-gray-600">京都名物のニッキ風味の薄焼き菓子</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 駄菓子 -->
-                <div class="wagashi-card fade-in" style="animation-delay: 0.6s;">
-                    <h3 class="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                        <i class="fas fa-candy-cane text-pink-500 mr-3"></i>
-                        駄菓子（だがし）
-                    </h3>
-                    <p class="text-gray-700 mb-4">庶民的で手頃な価格の菓子。子供から大人まで愛される親しみやすいお菓子です。</p>
-                    <div class="space-y-3">
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-fire text-red-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">かりんとう</span>
-                                <p class="text-sm text-gray-600">小麦粉を揚げて黒糖をからめた昔ながらの味</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center p-3 bg-white/50 rounded-lg">
-                            <i class="fas fa-candy text-rainbow-500 mr-3"></i>
-                            <div>
-                                <span class="font-semibold">飴菓子</span>
-                                <p class="text-sm text-gray-600">様々な味と形で楽しめる砂糖菓子</p>
+                                <span class="font-semibold">焼肉さん太郎</span>
+                                <p class="text-sm text-gray-600">焼肉の味を再現したスパイシーなお菓子</p>
                             </div>
                         </div>
                     </div>
@@ -514,28 +578,28 @@
     <!-- Fun Facts Section -->
     <section class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-red-700 text-center mb-16 fade-in">
-                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
-                和菓子の面白い豆知識
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--text-dark);">
+                <i class="fas fa-lightbulb mr-3" style="color: var(--primary-pink);"></i>
+                駄菓子の面白い豆知識
             </h2>
             
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="wagashi-card text-center fade-in">
-                    <div class="text-4xl mb-4">🌸</div>
-                    <h3 class="text-xl font-bold text-red-700 mb-3">季節の表現</h3>
-                    <p class="text-gray-700">和菓子は季節を先取りして作られます。桜の和菓子は桜が咲く前に登場し、季節の移ろいを感じさせてくれます。</p>
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 text-center fade-in">
+                    <div class="text-4xl mb-4">🎆</div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--text-dark);">手頃な価格</h3>
+                    <p style="color: var(--text-soft);">駄菓子の魅力の一つは手頃な価格！小学生のお小遣いでもたくさん買えるように作られています。</p>
                 </div>
                 
-                <div class="wagashi-card text-center fade-in" style="animation-delay: 0.2s;">
-                    <div class="text-4xl mb-4">🎨</div>
-                    <h3 class="text-xl font-bold text-red-700 mb-3">五感で味わう</h3>
-                    <p class="text-gray-700">和菓子は味だけでなく、見た目、香り、食感、そして菓子の名前から想像する情景まで、五感すべてで楽しむものです。</p>
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="text-4xl mb-4">🎲</div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--text-dark);">おもちゃ付き</h3>
+                    <p style="color: var(--text-soft);">チョコバットには野球カード、フエラムネは笛のように音が鳴るなど、お菓子以外の楽しみもあります。</p>
                 </div>
                 
-                <div class="wagashi-card text-center fade-in" style="animation-delay: 0.4s;">
-                    <div class="text-4xl mb-4">📚</div>
-                    <h3 class="text-xl font-bold text-red-700 mb-3">文学との関係</h3>
-                    <p class="text-gray-700">多くの和菓子の名前は古典文学から取られています。「最中」は源氏物語の一節「もなかの月」から名付けられました。</p>
+                <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover p-6 text-center fade-in" style="animation-delay: 0.4s;">
+                    <div class="text-4xl mb-4">😄</div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--text-dark);">ユニークな名前</h3>
+                    <p style="color: var(--text-soft);">「タラタラしてんじゃね～よ」など、インパクトのある名前の駄菓子がたくさん！名前だけで話題になります。</p>
                 </div>
             </div>
         </div>
@@ -547,23 +611,12 @@
             <div style="background-image: radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.1) 20%, transparent 20%), radial-gradient(circle at 75% 75%, rgba(220, 38, 38, 0.1) 20%, transparent 20%); background-size: 100px 100px;" class="w-full h-full"></div>
         </div>
         <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="flex justify-center items-center gap-4 mb-8 fade-in">
-                <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" class="hover:scale-110 transition-transform duration-300">
-                    <circle cx="28" cy="28" r="28" fill="url(#footerGradient)"/>
-                    <ellipse cx="28" cy="32" rx="18" ry="12" fill="var(--primary-red)"/>
-                    <text x="28" y="30" text-anchor="middle" font-size="18" font-family="Noto Sans JP, Inter, sans-serif" fill="#fff" font-weight="bold">祭</text>
-                    <defs>
-                        <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="text-4xl font-extrabold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">DaGacha!</span>
+            <div class="flex justify-center items-center mb-8 fade-in">
+                <img src="../assets/logo-simple.png" alt="DaGacha!" class="h-16 w-auto max-w-[250px] hover:scale-105 transition-transform duration-300 opacity-90">
             </div>
             <p class="mb-10 text-yellow-100 text-xl leading-relaxed fade-in" style="animation-delay: 0.2s;">
-                <i class="fas fa-history mr-2"></i>
-                千年の歴史と伝統を味わう和菓子の世界へようこそ！
+                <i class="fas fa-sparkles mr-2"></i>
+                日本の駄菓子文化と歴史を楽しく学びましょう！かわいい駄菓子で素敵な思い出を作りましょう！
                 <i class="fas fa-heart ml-2 text-pink-300"></i>
             </p>
             <div class="border-t border-white/20 pt-8 fade-in" style="animation-delay: 0.4s;">
