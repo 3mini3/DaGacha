@@ -556,27 +556,38 @@
             let cart = [];
 
             function addToCart() {
-                const cartItem = cart.find(item => item.id === randomBox.id);
-                if (cartItem) {
-                    cartItem.quantity++;
-                } else {
-                    cart.push({ ...randomBox, quantity: 1 });
-                }
+                const totalQuantity = dagashiList.reduce((sum, item) => sum + item.quantity, 0);
+                const customizeFee = calculateCustomizeFee(totalQuantity);
+                const finalPrice = randomBox.price + customizeFee;
+                
+                const cartItem = {
+                    ...randomBox,
+                    quantity: 1,
+                    finalPrice: finalPrice,
+                    customization: {
+                        selectedItems: [...dagashiList],
+                        totalCustomItems: totalQuantity,
+                        customizeFee: customizeFee,
+                        randomItems: 30 - totalQuantity
+                    }
+                };
+                
+                // Always add as new item (different customizations)
+                cart.push(cartItem);
                 updateCart();
                 openCart();
             }
 
-            window.removeFromCart = (productId) => {
-                cart = cart.filter(item => item.id !== productId);
+            window.removeFromCart = (cartIndex) => {
+                cart.splice(cartIndex, 1);
                 updateCart();
             };
 
-            window.updateQuantity = (productId, change) => {
-                const cartItem = cart.find(item => item.id === productId);
-                if (cartItem) {
-                    cartItem.quantity += change;
-                    if (cartItem.quantity <= 0) {
-                        removeFromCart(productId);
+            window.updateQuantity = (cartIndex, change) => {
+                if (cart[cartIndex]) {
+                    cart[cartIndex].quantity += change;
+                    if (cart[cartIndex].quantity <= 0) {
+                        removeFromCart(cartIndex);
                     } else {
                         updateCart();
                     }
@@ -596,24 +607,75 @@
                     cartItemsContainer.appendChild(emptyCartMessage);
                 } else {
                     emptyCartMessage.classList.add('hidden');
-                    cartItemsContainer.innerHTML = cart.map(item => `
-                        <div class="flex items-center gap-4 mb-4 pb-4 border-b last:border-b-0 cart-item-enter-active">
-                            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md">
-                            <div class="flex-grow">
-                                <p class="font-semibold">${item.name}</p>
-                                <p class="text-gray-500 text-sm">$${item.price.toFixed(2)}</p>
-                                <div class="flex items-center mt-2">
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full" onclick="updateQuantity(${item.id}, -1)">-</button>
-                                    <span class="px-3">${item.quantity}</span>
-                                    <button class="w-6 h-6 bg-gray-200 rounded-full" onclick="updateQuantity(${item.id}, 1)">+</button>
+                    cartItemsContainer.innerHTML = cart.map((item, index) => {
+                        const hasCustomization = item.customization && item.customization.selectedItems.length > 0;
+                        return `
+                        <div class="mb-6 pb-6 border-b last:border-b-0 cart-item-enter-active">
+                            <div class="flex items-start gap-4">
+                                <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md flex-shrink-0">
+                                <div class="flex-grow">
+                                    <p class="font-semibold text-lg" style="color: var(--text-dark);">${item.name}</p>
+                                    <p class="text-sm mb-2" style="color: var(--text-soft);">Base price: $${item.price.toFixed(2)}</p>
+                                    
+                                    ${hasCustomization ? `
+                                    <div class="bg-white/60 rounded-lg p-3 mb-3 border" style="border-color: var(--primary-pink);">
+                                        <h4 class="font-semibold text-sm mb-2 flex items-center" style="color: var(--text-dark);">
+                                            <i class="fas fa-cog mr-2" style="color: var(--primary-pink);"></i>
+                                            Box Contents (30 items total):
+                                        </h4>
+                                        <div class="space-y-1 text-xs">
+                                            <div class="flex justify-between">
+                                                <span style="color: var(--text-soft);">Selected items:</span>
+                                                <span class="font-semibold" style="color: var(--primary-pink);">${item.customization.totalCustomItems}</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span style="color: var(--text-soft);">Random items:</span>
+                                                <span class="font-semibold" style="color: var(--secondary-mint);">${item.customization.randomItems}</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 pt-2 border-t border-gray-200">
+                                            <p class="text-xs font-semibold mb-1" style="color: var(--text-dark);">Your Selected Items:</p>
+                                            <div class="flex flex-wrap gap-1">
+                                                ${item.customization.selectedItems.map(custom => 
+                                                    `<span class="bg-gradient-to-r from-pink-100 to-purple-100 px-2 py-1 rounded-full text-xs" style="color: var(--text-dark);">
+                                                        ${custom.name} (${custom.quantity})
+                                                    </span>`
+                                                ).join('')}
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 pt-2 border-t border-gray-200 flex justify-between items-center">
+                                            <span class="text-xs font-semibold" style="color: var(--text-soft);">Customize Fee:</span>
+                                            <span class="text-xs font-bold" style="color: var(--secondary-mint);">+$${item.customization.customizeFee.toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                    ` : `
+                                    <div class="bg-white/60 rounded-lg p-3 mb-3 border border-gray-200">
+                                        <p class="text-sm" style="color: var(--text-soft);">
+                                            <i class="fas fa-dice mr-2" style="color: var(--secondary-mint);"></i>
+                                            Standard Random Box (30 random dagashi items)
+                                        </p>
+                                    </div>
+                                    `}
+                                    
+                                    <div class="flex items-center mt-3">
+                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: var(--primary-pink);" onclick="updateQuantity(${index}, -1)">
+                                            <i class="fas fa-minus text-xs"></i>
+                                        </button>
+                                        <span class="px-4 font-bold text-lg" style="color: var(--text-dark);">${item.quantity}</span>
+                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: var(--secondary-mint);" onclick="updateQuantity(${index}, 1)">
+                                            <i class="fas fa-plus text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="text-right flex-shrink-0">
+                                    <p class="font-bold text-xl mb-2" style="color: var(--primary-pink);">$${(item.finalPrice * item.quantity).toFixed(2)}</p>
+                                    <button class="text-sm hover:underline transition" style="color: var(--primary-pink);" onclick="removeFromCart(${index})">
+                                        <i class="fas fa-trash mr-1"></i>Remove
+                                    </button>
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <p class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</p>
-                                <button class="text-rose-500 text-sm hover:underline" onclick="removeFromCart(${item.id})">Remove</button>
-                            </div>
                         </div>
-                    `).join('');
+                    `}).join('');
                 }
             }
 
@@ -623,7 +685,7 @@
             }
 
             function updateSubtotal() {
-                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const subtotal = cart.reduce((sum, item) => sum + (item.finalPrice || item.price) * item.quantity, 0);
                 cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
             }
 
