@@ -260,17 +260,11 @@
             box-shadow: var(--shadow-soft);
         }
         
-        @media (max-width: 768px) {
-            .matsuri-lanterns {
-                gap: 1rem;
-            }
-            .lantern {
-                width: 40px;
-                height: 56px;
-            }
-            .hero-title {
-                font-size: clamp(2rem, 6vw, 3rem);
-            }
+        .japanese-text {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            font-weight: 400;
         }
     </style>
 </head>
@@ -319,10 +313,15 @@
                 </span>
             </h1>
             <p class="text-2xl md:text-3xl font-bold mb-8 fade-in" style="color: var(--text-soft); animation-delay: 0.2s;">
-                Full of nostalgic Dagashi!<br>
+                Full of nostalgic Japanese snacks!<br>
                 Find your own favorites with DaGacha!<br>
                 <span class="inline-block animate-pulse">✨</span>
                 It's like a treasure hunt!
+                <div class="japanese-text">
+                    懐かしい駄菓子がいっぱい！<br>
+                    DaGachaであなたのお気に入りを見つけよう！<br>
+                    宝探しみたいだよ！
+                </div>
             </p>
             <a href="#products" class="btn-primary inline-block fade-in text-lg" style="animation-delay: 0.4s;">
                 <i class="fas fa-heart mr-2"></i>
@@ -341,7 +340,9 @@
         <div class="max-w-4xl mx-auto">
             <div class="glass-morphism rounded-3xl shadow-2xl overflow-hidden card-hover">
                 <div class="relative">
-                    <img src="https://placehold.co/800x400/E11D48/FEFBF6?text=Gacha+Box" alt="Gacha Box" class="w-full h-80 object-cover">
+                    <div class="w-full h-80 bg-gradient-to-br from-red-100 to-pink-100 rounded-lg flex items-center justify-center text-8xl">
+                        🎁
+                    </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                     <!-- <div class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
                         <i class="fas fa-star mr-1"></i>
@@ -355,7 +356,8 @@
                     </h2>
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <p class="text-xl mb-6 leading-relaxed" style="color: var(--text-soft);">The Gacha Box contains a delightful assortment of 30  Japanese dagashi snacks. Find your favorites and enjoy a taste of nostalgia!</p>
+                            <p class="text-xl mb-6 leading-relaxed" style="color: var(--text-soft);">The Gacha Box contains a delightful assortment of 30 Japanese snacks. Find your favorites and enjoy a taste of nostalgia!</p>
+                            <div class="japanese-text">ガチャボックスには30種類の日本の駄菓子が入っています。お気に入りを見つけ、懐かしい味をお楽しみください！</div>
                             <ul class="space-y-3 mb-8" style="color: var(--text-soft);">
                                 <li class="flex items-center">
                                     <i class="fas fa-heart mr-3" style="color: var(--primary-pink);"></i>
@@ -419,7 +421,9 @@
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="lg:w-1/2 fade-in">
                     <div class="relative">
-                        <img src="https://placehold.co/600x400/fecaca/881337?text=Our+Story" alt="Japanese Snack Assortment" class="rounded-3xl shadow-2xl w-full card-hover">
+                        <div class="rounded-3xl shadow-2xl w-full h-64 bg-gradient-to-br from-orange-100 to-yellow-100 flex items-center justify-center text-6xl card-hover">
+                            🍪
+                        </div>
                         <div class="absolute -top-6 -right-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-white p-4 rounded-2xl shadow-lg rotate-12">
                             <i class="fas fa-heart text-2xl"></i>
                         </div>
@@ -441,7 +445,8 @@
                                 <div class="p-3 rounded-full mr-4 flex-shrink-0" style="background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));">
                                     <i class="fas fa-gift text-white text-lg"></i>
                                 </div>
-                                <p class="text-lg leading-relaxed" style="color: var(--text-soft);">DaGacha! brings the excitement of Japanese dagashi gacha to Singapore, with customizable mixes of sweet, salty, and spicy flavors.</p>
+                                <p class="text-lg leading-relaxed" style="color: var(--text-soft);">DaGacha! brings the excitement of Japanese snacks to Singapore, with customizable mixes of sweet, salty, and spicy flavors.</p>
+                                <div class="japanese-text">DaGacha!はシンガポールに日本の駄菓子のワクワク感をお届けします。甘い、塩辛い、辛い味のカスタマイズミックス付き。</div>
                             </div>
                         </div>
                         <div class="glass-morphism p-6 rounded-2xl">
@@ -450,6 +455,7 @@
                                     <i class="fas fa-globe text-white text-lg"></i>
                                 </div>
                                 <p class="text-lg leading-relaxed" style="color: var(--text-soft);">We share Japan's nostalgic snacks abroad, creating cultural connections through affordable, quick-delivery surprises from Japan.</p>
+                                <div class="japanese-text">私たちは日本の懐かしい駄菓子を海外に届け、手頃な価格と迅速な配送で日本のサプライズを通じて文化的つながりを生み出します。</div>
                             </div>
                         </div>
                     </div>
@@ -469,7 +475,11 @@
             </div>
             <p class="mb-10 text-yellow-100 text-xl leading-relaxed fade-in" style="animation-delay: 0.2s;">
                 <i class="fas fa-sparkles mr-2"></i>
-                Experience kawaii magic with adorable dagashi gacha! Let's create cute memories together!
+                Experience kawaii magic with adorable Japanese snacks! Let's create cute memories together!
+                <div class="japanese-text">
+                    <i class="fas fa-sparkles mr-2"></i>
+                    可愛い駄菓子でカワイイ魔法を体験しよう！一緒に素敵な思い出を作ろう！
+                </div>
                 <i class="fas fa-heart ml-2 text-pink-300"></i>
             </p>
             <div class="flex justify-center space-x-8 mb-12 fade-in" style="animation-delay: 0.4s;">
@@ -539,8 +549,9 @@
                 id: 100,
                 name: 'Random Box',
                 price: 25.00,
-                image: 'https://placehold.co/600x300/E11D48/FEFBF6?text=Random+Box',
-                description: '日本の駄菓子が20コ入ったサプライズボックス！中身は事前に知ることができません。開けるまでのお楽しみ！',
+                image: '🎲',
+                description: 'A surprise box containing 30 Japanese snacks! You won\'t know the contents until you open it. Enjoy the excitement!',
+                japaneseDescription: '日本の駄菓子が30コ入ったサプライズボックス！中身は事前に知ることができません。開けるまでのお楽しみ！',
             };
 
             const cartButton = document.getElementById('cart-button');
@@ -657,52 +668,54 @@
 
             // Slider dagashi data - Updated from assets/items.pdf
             const dagashiData = [
-                { name: "うまい棒", img: "https://placehold.co/120x120/E11D48/fff?text=うまい棒", category: "塩っぽい", price: 10 },
-                { name: "チロルチョコ", img: "https://placehold.co/120x120/8B4513/fff?text=チロル", category: "チョコ", price: 23 },
-                { name: "くっぴーラムネ", img: "https://placehold.co/120x120/87CEEB/333?text=ラムネ", category: "砂糖", price: 30 },
-                { name: "フエラムネ", img: "https://placehold.co/120x120/FFD700/333?text=フエラムネ", category: "砂糖", price: 70 },
-                { name: "ココアシガレット", img: "https://placehold.co/120x120/8B4513/fff?text=ココア", category: "チョコ", price: 20 },
-                { name: "ミニコーラ", img: "https://placehold.co/120x120/DC143C/fff?text=コーラ", category: "チョコ", price: 30 },
-                { name: "チョコバット", img: "https://placehold.co/120x120/654321/fff?text=バット", category: "砂糖", price: 50 },
-                { name: "きなこ棒", img: "https://placehold.co/120x120/DEB887/333?text=きなこ", category: "砂糖", price: 40 },
-                { name: "ボンタンアメ", img: "https://placehold.co/120x120/FFA500/333?text=ボンタン", category: "砂糖", price: 60 },
-                { name: "キャベツ太郎", img: "https://placehold.co/120x120/32CD32/333?text=キャベツ", category: "塩っぽい", price: 30 },
-                { name: "ベビースターラーメン", img: "https://placehold.co/120x120/FF6347/fff?text=ベビースター", category: "塩っぽい", price: 50 },
-                { name: "ビッグカツ", img: "https://placehold.co/120x120/D2691E/fff?text=カツ", category: "塩っぽい", price: 30 },
-                { name: "蒲焼さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=蒲焼", category: "塩っぽい", price: 30 },
-                { name: "どんどん焼き", img: "https://placehold.co/120x120/F4A460/333?text=焼き", category: "塩っぽい", price: 40 },
-                { name: "ふがし", img: "https://placehold.co/120x120/F5DEB3/333?text=ふがし", category: "塩っぽい", price: 20 },
-                { name: "黒棒", img: "https://placehold.co/120x120/2F4F4F/fff?text=黒棒", category: "塩っぽい", price: 30 },
-                { name: "玉葱さん太郎", img: "https://placehold.co/120x120/FFFF99/333?text=玉葱", category: "塩っぽい", price: 30 },
-                { name: "チーズあられ", img: "https://placehold.co/120x120/FFD700/333?text=チーズ", category: "塩っぽい", price: 50 },
-                { name: "ソースせんべい", img: "https://placehold.co/120x120/8B4513/fff?text=ソース", category: "塩っぽい", price: 40 },
-                { name: "タラタラしてんじゃね～よ", img: "https://placehold.co/120x120/FF4500/fff?text=タラタラ", category: "辛い", price: 80 },
-                { name: "焼肉さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=焼肉", category: "辛い", price: 30 },
-                { name: "酢だこさん太郎", img: "https://placehold.co/120x120/DC143C/fff?text=酢だこ", category: "辛い", price: 30 }
+                { name: "Umai Bar", japaneseName: "うまい棒", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 10 },
+                { name: "Chiro Choco", japaneseName: "チロルチョコ", img: "🍫", category: "Chocolate", japaneseCategory: "チョコ", price: 23 },
+                { name: "Cuppy Ramune", japaneseName: "くっぴーラムネ", img: "🍬", category: "Sweet", japaneseCategory: "砂糖", price: 30 },
+                { name: "Fue Ramune", japaneseName: "フエラムネ", img: "🍬", category: "Sweet", japaneseCategory: "砂糖", price: 70 },
+                { name: "Cocoa Cigarette", japaneseName: "ココアシガレット", img: "🍫", category: "Chocolate", japaneseCategory: "チョコ", price: 20 },
+                { name: "Mini Cola", japaneseName: "ミニコーラ", img: "🍫", category: "Chocolate", japaneseCategory: "チョコ", price: 30 },
+                { name: "Choco Bat", japaneseName: "チョコバット", img: "🍬", category: "Sweet", japaneseCategory: "砂糖", price: 50 },
+                { name: "Kinako Stick", japaneseName: "きなこ棒", img: "🍬", category: "Sweet", japaneseCategory: "砂糖", price: 40 },
+                { name: "Bontan Candy", japaneseName: "ボンタンアメ", img: "🍬", category: "Sweet", japaneseCategory: "砂糖", price: 60 },
+                { name: "Cabbage Boy", japaneseName: "キャベツ太郎", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 30 },
+                { name: "Baby Star Ramen", japaneseName: "ベビースターラーメン", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 50 },
+                { name: "Big Katsu", japaneseName: "ビッグカツ", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 30 },
+                { name: "Grilled Eel Boy", japaneseName: "蒲焼さん太郎", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 30 },
+                { name: "Dondon Yaki", japaneseName: "どんどん焼き", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 40 },
+                { name: "Fugashi", japaneseName: "ふがし", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 20 },
+                { name: "Black Stick", japaneseName: "黒棒", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 30 },
+                { name: "Onion Boy", japaneseName: "玉葱さん太郎", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 30 },
+                { name: "Cheese Rice Crackers", japaneseName: "チーズあられ", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 50 },
+                { name: "Sauce Rice Crackers", japaneseName: "ソースせんべい", img: "🥨", category: "Salty", japaneseCategory: "塩っぽい", price: 40 },
+                { name: "Tarara Shitenjane", japaneseName: "タラタラしてんじゃね～よ", img: "🌶️", category: "Spicy", japaneseCategory: "辛い", price: 80 },
+                { name: "Grilled Meat Boy", japaneseName: "焼肉さん太郎", img: "🌶️", category: "Spicy", japaneseCategory: "辛い", price: 30 },
+                { name: "Vinegared Octopus Boy", japaneseName: "酢だこさん太郎", img: "🌶️", category: "Spicy", japaneseCategory: "辛い", price: 30 }
             ];
             let sliderIndex = 0;
             const sliderContent = document.getElementById('slider-content');
             function renderSlider() {
                 const d = dagashiData[sliderIndex];
                 const categoryColor = {
-                    '塩っぽい': 'text-blue-600',
-                    'チョコ': 'text-amber-600', 
-                    '砂糖': 'text-pink-600',
-                    '辛い': 'text-red-600'
+                    'Salty': 'text-blue-600',
+                    'Chocolate': 'text-amber-600', 
+                    'Sweet': 'text-pink-600',
+                    'Spicy': 'text-red-600'
                 }[d.category] || 'text-gray-600';
                 
                 sliderContent.innerHTML = `
                     <div class="text-center">
                         <div class="relative inline-block mb-4">
-                            <img src="${d.img}" alt="${d.name}" class="rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 mx-auto">
+                            <div class="text-6xl bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-4 shadow-lg hover:scale-105 transition-transform duration-300 mx-auto">${d.img}</div>
                             <div class="absolute -top-2 -right-2 bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs px-2 py-1 rounded-full font-bold shadow-lg">
                                 ¥${d.price}
                             </div>
                         </div>
                         <span class="font-bold text-lg text-red-700 mb-2 block">${d.name}</span>
+                        <div class="japanese-text mb-2">${d.japaneseName}</div>
                         <span class="text-sm ${categoryColor} mb-4 block font-semibold">
                             <i class="fas fa-tag mr-1"></i>${d.category}
                         </span>
+                        <div class="japanese-text mb-4">${d.japaneseCategory}</div>
                         <button class="add-dagashi-btn btn-primary px-6 py-2 text-sm" data-name="${d.name}" data-price="${d.price}">
                             <i class="fas fa-plus mr-2"></i>Add to Box (+¥${d.price})
                         </button>
@@ -712,7 +725,7 @@
                 sliderContent.querySelector('.add-dagashi-btn').onclick = function() {
                     const existingItem = dagashiList.find(item => item.name === d.name);
                     if (!existingItem) {
-                        dagashiList.push({ name: d.name, price: d.price, category: d.category });
+                        dagashiList.push({ name: d.name, japaneseName: d.japaneseName, price: d.price, category: d.category });
                         renderDagashiList();
                         // Add visual feedback
                         this.innerHTML = '<i class="fas fa-check mr-2"></i>Added!';
@@ -755,6 +768,7 @@
                                 <i class="fas fa-candy-cane text-orange-500 mr-3"></i>
                                 <div>
                                     <span class="font-semibold text-red-700">${item.name}</span>
+                                    <div class="japanese-text">${item.japaneseName}</div>
                                     <div class="text-xs text-gray-600">
                                         <span class="bg-gray-100 px-2 py-1 rounded-full">${item.category}</span>
                                         <span class="ml-2 font-bold text-orange-600">¥${item.price}</span>
