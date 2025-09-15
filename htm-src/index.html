@@ -726,6 +726,10 @@
                 window.location.href = `checkout.html?cart=${cartData}`;
             }
 
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', addToCart);
+            }
+
             if (checkoutBtn) {
                 checkoutBtn.addEventListener('click', proceedToCheckout);
             }
