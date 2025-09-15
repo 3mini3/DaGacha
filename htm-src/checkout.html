@@ -140,9 +140,7 @@
                     <i class="fas fa-shopping-cart mr-4" style="color: var(--primary-pink);"></i>
                     Checkout
                 </h1>
-                <div class="japanese-text">チェックアウト</div>
                 <p class="text-xl" style="color: var(--text-soft);">Complete your order and enjoy your Japanese snacks!</p>
-                <div class="japanese-text">注文を完了して、日本の駄菓子をお楽しみください！</div>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
@@ -152,8 +150,6 @@
                         <i class="fas fa-receipt mr-3" style="color: var(--primary-pink);"></i>
                         Order Summary
                     </h2>
-                    <div class="japanese-text mb-6">注文内容</div>
-
                     <div id="order-items" class="space-y-4 mb-6">
                         <!-- Order items will be populated by JavaScript -->
                     </div>
@@ -163,112 +159,25 @@
                             <span style="color: var(--text-dark);">Total:</span>
                             <span id="order-total" style="color: var(--primary-pink);">$0.00</span>
                         </div>
-                        <div class="japanese-text">合計</div>
                     </div>
                 </div>
 
                 <!-- Checkout Form -->
                 <div class="glass-morphism rounded-3xl p-8">
-                    <h2 class="text-3xl font-bold mb-6" style="color: var(--text-dark);">
-                        <i class="fas fa-user mr-3" style="color: var(--primary-pink);"></i>
-                        Customer Information
-                    </h2>
-                    <div class="japanese-text mb-6">お客様情報</div>
-
                     <form id="checkout-form" class="space-y-6">
-                        <!-- Email -->
-                        <div>
-                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
-                                <i class="fas fa-envelope mr-2" style="color: var(--primary-pink);"></i>
-                                Email Address *
-                            </label>
-                            <div class="japanese-text mb-2">メールアドレス *</div>
-                            <input type="email" id="email" class="form-input w-full" placeholder="your@email.com" required>
-                        </div>
-
-                        <!-- Name -->
-                        <div>
-                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
-                                <i class="fas fa-user mr-2" style="color: var(--primary-pink);"></i>
-                                Full Name *
-                            </label>
-                            <div class="japanese-text mb-2">お名前 *</div>
-                            <input type="text" id="name" class="form-input w-full" placeholder="Your Full Name" required>
-                        </div>
-
-                        <!-- Address -->
-                        <div>
-                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
-                                <i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-pink);"></i>
-                                Shipping Address *
-                            </label>
-                            <div class="japanese-text mb-2">配送先住所 *</div>
-                            <textarea id="address" class="form-input w-full h-24 resize-none" placeholder="Street Address, City, State, ZIP Code, Country" required></textarea>
-                        </div>
-
-                        <!-- Payment Method -->
-                        <div>
-                            <label class="block text-lg font-semibold mb-4" style="color: var(--text-dark);">
-                                <i class="fas fa-credit-card mr-2" style="color: var(--primary-pink);"></i>
-                                Payment Method
-                            </label>
-                            <div class="japanese-text mb-4">決済方法</div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <button type="button" id="card-payment" class="subscription-option selected">
-                                    <i class="fas fa-credit-card text-2xl mb-2" style="color: var(--primary-pink);"></i>
-                                    <div class="font-semibold" style="color: var(--text-dark);">Credit Card</div>
-                                    <div class="japanese-text">クレジットカード</div>
-                                </button>
-                                <button type="button" id="paypal-payment" class="subscription-option">
-                                    <i class="fab fa-paypal text-2xl mb-2" style="color: var(--secondary-mint);"></i>
-                                    <div class="font-semibold" style="color: var(--text-dark);">PayPal</div>
-                                    <div class="japanese-text">ペイパル</div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Newsletter Subscription -->
-                        <div class="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl border-2 border-pink-200">
-                            <div class="flex items-start space-x-4">
-                                <input type="checkbox" id="newsletter" class="mt-1 w-5 h-5 text-pink-600 rounded focus:ring-pink-500">
-                                <div>
-                                    <label for="newsletter" class="text-lg font-semibold cursor-pointer" style="color: var(--text-dark);">
-                                        <i class="fas fa-gift mr-2" style="color: var(--primary-pink);"></i>
-                                        Subscribe to Newsletter
-                                    </label>
-                                    <div class="japanese-text">ニュースレター購読</div>
-                                    <p class="text-sm mt-2" style="color: var(--text-soft);">
-                                        Get exclusive discounts and be the first to know about new Japanese snacks!
-                                        <br><strong style="color: var(--primary-pink);">You'll receive a 10% discount coupon for your next order!</strong>
-                                    </p>
-                                    <div class="japanese-text">
-                                        限定割引や新しい日本の駄菓子情報をいち早くゲット！
-                                        <br><strong style="color: var(--primary-pink);">次回注文で10%割引クーポンをプレゼント！</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Subscription Plans -->
                         <div>
-                            <label class="block text-lg font-semibold mb-4" style="color: var(--text-dark);">
+                            <h2 class="text-3xl font-bold mb-6" style="color: var(--text-dark);">
                                 <i class="fas fa-calendar-alt mr-2" style="color: var(--primary-pink);"></i>
                                 Subscription Plans (Optional)
-                            </label>
-                            <div class="japanese-text mb-4">定期購読プラン（任意）</div>
+                            </h2>
 
                             <div class="space-y-4">
                                 <div class="subscription-option" data-plan="none">
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <div class="font-semibold text-lg" style="color: var(--text-dark);">One-time Purchase</div>
-                                            <div class="japanese-text">単発購入</div>
                                             <div class="text-sm" style="color: var(--text-soft);">No recurring charges</div>
-                                            <div class="japanese-text">定期課金なし</div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-2xl font-bold" style="color: var(--primary-pink);">$30</div>
-                                            <div class="text-sm" style="color: var(--text-soft);">SGD per box</div>
                                         </div>
                                     </div>
                                 </div>
@@ -277,14 +186,11 @@
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <div class="font-semibold text-lg" style="color: var(--text-dark);">Monthly Subscription</div>
-                                            <div class="japanese-text">月額定期購読</div>
                                             <div class="text-sm" style="color: var(--text-soft);">Get a surprise box every month</div>
-                                            <div class="japanese-text">毎月サプライズボックスをお届け</div>
                                         </div>
                                         <div class="text-right">
                                             <div class="text-2xl font-bold" style="color: var(--primary-pink);">$27</div>
                                             <div class="text-sm" style="color: var(--text-soft);">SGD per month</div>
-                                            <div class="japanese-text">月額</div>
                                         </div>
                                     </div>
                                 </div>
@@ -293,14 +199,11 @@
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <div class="font-semibold text-lg" style="color: var(--text-dark);">6-Month Subscription</div>
-                                            <div class="japanese-text">6ヶ月定期購読</div>
                                             <div class="text-sm" style="color: var(--text-soft);">Save $3 per month with 6-month plan</div>
-                                            <div class="japanese-text">6ヶ月プランで月々$5お得</div>
                                         </div>
                                         <div class="text-right">
                                             <div class="text-2xl font-bold" style="color: var(--primary-pink);">$25</div>
                                             <div class="text-sm" style="color: var(--text-soft);">SGD per month</div>
-                                            <div class="japanese-text">月額</div>
                                         </div>
                                     </div>
                                 </div>
@@ -309,26 +212,92 @@
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <div class="font-semibold text-lg" style="color: var(--text-dark);">Yearly Subscription</div>
-                                            <div class="japanese-text">年間定期購読</div>
                                             <div class="text-sm" style="color: var(--text-soft);">Save $5 per month with yearly plan</div>
-                                            <div class="japanese-text">年間プランで月々$7お得</div>
                                         </div>
                                         <div class="text-right">
                                             <div class="text-2xl font-bold" style="color: var(--primary-pink);">$23</div>
                                             <div class="text-sm" style="color: var(--text-soft);">SGD per month</div>
-                                            <div class="japanese-text">月額</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Customer Information -->
+                        <div class="mt-8">
+                            <h2 class="text-3xl font-bold mb-6" style="color: var(--text-dark);">
+                                <i class="fas fa-user mr-3" style="color: var(--primary-pink);"></i>
+                                Customer Information
+                            </h2>
+
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                    <i class="fas fa-envelope mr-2" style="color: var(--primary-pink);"></i>
+                                    Email Address *
+                                </label>
+                                <input type="email" id="email" class="form-input w-full" placeholder="your@email.com" required>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="mt-4">
+                                <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                    <i class="fas fa-user mr-2" style="color: var(--primary-pink);"></i>
+                                    Full Name *
+                                </label>
+                                <input type="text" id="name" class="form-input w-full" placeholder="Your Full Name" required>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="mt-4">
+                                <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                    <i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-pink);"></i>
+                                    Shipping Address *
+                                </label>
+                                <textarea id="address" class="form-input w-full h-24 resize-none" placeholder="Street Address, City, State, ZIP Code, Country" required></textarea>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="mt-4">
+                                <label class="block text-lg font-semibold mb-4" style="color: var(--text-dark);">
+                                    <i class="fas fa-credit-card mr-2" style="color: var(--primary-pink);"></i>
+                                    Payment Method
+                                </label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button type="button" id="card-payment" class="subscription-option selected">
+                                        <i class="fas fa-credit-card text-2xl mb-2" style="color: var(--primary-pink);"></i>
+                                        <div class="font-semibold" style="color: var(--text-dark);">Credit Card</div>
+                                    </button>
+                                    <button type="button" id="paypal-payment" class="subscription-option">
+                                        <i class="fab fa-paypal text-2xl mb-2" style="color: var(--secondary-mint);"></i>
+                                        <div class="font-semibold" style="color: var(--text-dark);">PayPal</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Newsletter Subscription -->
+                            <div class="mt-4 bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl border-2 border-pink-200">
+                                <div class="flex items-start space-x-4">
+                                    <input type="checkbox" id="newsletter" class="mt-1 w-5 h-5 text-pink-600 rounded focus:ring-pink-500">
+                                    <div>
+                                        <label for="newsletter" class="text-lg font-semibold cursor-pointer" style="color: var(--text-dark);">
+                                            <i class="fas fa-gift mr-2" style="color: var(--primary-pink);"></i>
+                                            Subscribe to Newsletter
+                                        </label>
+                                        <p class="text-sm mt-2" style="color: var(--text-soft);">
+                                            Get exclusive discounts and be the first to know about new Japanese snacks!
+                                            <br><strong style="color: var(--primary-pink);">You'll receive a 10% discount coupon for your next order!</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Place Order Button -->
-                        <button type="submit" class="w-full btn-primary py-4 text-xl">
+                        <button type="submit" class="w-full btn-primary py-4 text-xl mt-8">
                             <i class="fas fa-shopping-bag mr-3"></i>
                             Place Order
                         </button>
-                        <div class="japanese-text text-center">注文する</div>
                     </form>
                 </div>
             </div>
@@ -359,16 +328,37 @@
                 });
             });
 
-            // Subscription plan selection
+            // Subscription plan selection and pricing
+            const subscriptionPrices = {
+                'none': 30,
+                'monthly': 27,
+                '6months': 25,
+                'yearly': 23
+            };
+            
             const subscriptionOptions = document.querySelectorAll('[data-plan]');
             subscriptionOptions.forEach(option => {
                 option.addEventListener('click', () => {
                     subscriptionOptions.forEach(opt => opt.classList.remove('selected'));
                     option.classList.add('selected');
+                    updateTotalWithSubscription();
                 });
             });
 
-            // Set default selections
+            function updateTotalWithSubscription() {
+                const selectedPlan = document.querySelector('[data-plan].selected').dataset.plan;
+                const pricePerBox = subscriptionPrices[selectedPlan];
+                
+                let newTotal = 0;
+                cart.forEach(item => {
+                    const itemQuantity = item.quantity;
+                    newTotal += pricePerBox * itemQuantity;
+                });
+                
+                document.getElementById('order-total').textContent = `$${newTotal.toFixed(2)}`;
+            }
+
+            // Set default selections and initial total
             document.querySelector('[data-plan="none"]').classList.add('selected');
 
             // Render order summary
@@ -382,9 +372,12 @@
                     return;
                 }
 
+                const selectedPlan = document.querySelector('[data-plan].selected').dataset.plan;
+                const pricePerBox = subscriptionPrices[selectedPlan];
                 let total = 0;
+                
                 orderItems.innerHTML = cart.map((item, index) => {
-                    const itemTotal = (item.finalPrice || item.price) * item.quantity;
+                    const itemTotal = pricePerBox * item.quantity;
                     total += itemTotal;
 
                     return `
