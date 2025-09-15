@@ -719,28 +719,28 @@
 
             // Slider dagashi data - Updated from assets/items.pdf
             const dagashiData = [
-                { name: "うまい棒", emoji: "🌽", category: "塩っぽい" },
-                { name: "チロルチョコ", emoji: "🍫", category: "チョコ" },
-                { name: "くっぴーラムネ", emoji: "🍬", category: "砂糖" },
-                { name: "フエラムネ", emoji: "🎺", category: "砂糖" },
-                { name: "ココアシガレット", emoji: "🚬", category: "チョコ" },
-                { name: "ミニコーラ", emoji: "🥤", category: "チョコ" },
-                { name: "チョコバット", emoji: "⚾", category: "砂糖" },
-                { name: "きなこ棒", emoji: "🥜", category: "砂糖" },
-                { name: "ボンタンアメ", emoji: "🍊", category: "砂糖" },
-                { name: "キャベツ太郎", emoji: "🥬", category: "塩っぽい" },
-                { name: "ベビースターラーメン", emoji: "🍜", category: "塩っぽい" },
-                { name: "ビッグカツ", emoji: "🍗", category: "塩っぽい" },
-                { name: "蒲焼さん太郎", emoji: "🐟", category: "塩っぽい" },
-                { name: "どんどん焼き", emoji: "🍘", category: "塩っぽい" },
-                { name: "ふがし", emoji: "🌾", category: "塩っぽい" },
-                { name: "黒棒", emoji: "🍡", category: "塩っぽい" },
-                { name: "玉葱さん太郎", emoji: "🧅", category: "塩っぽい" },
-                { name: "チーズあられ", emoji: "🧀", category: "塩っぽい" },
-                { name: "ソースせんべい", emoji: "🍘", category: "塩っぽい" },
-                { name: "タラタラしてんじゃね～よ", emoji: "🐙", category: "辛い" },
-                { name: "焼肉さん太郎", emoji: "🥩", category: "辛い" },
-                { name: "酢だこさん太郎", emoji: "🐙", category: "辛い" }
+                { name: "Umaibo", emoji: "🌽", category: "Savory" },
+                { name: "Tirol Choco", emoji: "🍫", category: "Chocolate" },
+                { name: "Kuppy Ramune", emoji: "🍬", category: "Sweet" },
+                { name: "Fue Ramune", emoji: "🎺", category: "Sweet" },
+                { name: "Cocoa Cigarette", emoji: "🚬", category: "Chocolate" },
+                { name: "Mini Cola", emoji: "🥤", category: "Chocolate" },
+                { name: "Choco Bat", emoji: "⚾", category: "Sweet" },
+                { name: "Kinako Bar", emoji: "🥜", category: "Sweet" },
+                { name: "Bontan Ame", emoji: "🍊", category: "Sweet" },
+                { name: "Cabbage Taro", emoji: "🥬", category: "Savory" },
+                { name: "Baby Star Ramen", emoji: "🍜", category: "Savory" },
+                { name: "Big Katsu", emoji: "🍗", category: "Savory" },
+                { name: "Kabayaki-san Taro", emoji: "🐟", category: "Savory" },
+                { name: "Dondon Yaki", emoji: "🍘", category: "Savory" },
+                { name: "Fugashi", emoji: "🌾", category: "Savory" },
+                { name: "Kuro Bo", emoji: "🍡", category: "Savory" },
+                { name: "Onion-san Taro", emoji: "🧅", category: "Savory" },
+                { name: "Cheese Arare", emoji: "🧀", category: "Savory" },
+                { name: "Sauce Senbei", emoji: "🍘", category: "Savory" },
+                { name: "Taratara Shitenja Ne-yo", emoji: "🐙", category: "Spicy" },
+                { name: "Yakiniku-san Taro", emoji: "🥩", category: "Spicy" },
+                { name: "Sudako-san Taro", emoji: "🐙", category: "Spicy" }
             ];
             let sliderIndex = 0;
             const sliderContent = document.getElementById('slider-content');
@@ -760,7 +760,14 @@
                                 ${d.emoji}
                             </div>
                         </div>
-                        <span class="font-bold text-lg mb-2 block" style="color: var(--text-dark);">${d.name}</span>
+                        <span class="font-bold text-lg mb-2 block" style="color: var(--text-dark);">
+                            ${d.name === 'Umaibo' ? 
+                                `<a href="DagashiHistoryPages/Umaibo.html" class="hover:text-pink-500 transition-colors duration-200">${d.name}</a>` :
+                             d.name === 'Tirol Choco' ? 
+                                `<a href="DagashiHistoryPages/Tirol-choco.html" class="hover:text-pink-500 transition-colors duration-200">${d.name}</a>` :
+                                d.name
+                            }
+                        </span>
                         <span class="text-sm ${categoryColor} mb-4 block font-semibold">
                             <i class="fas fa-tag mr-1"></i>${d.category}
                         </span>
