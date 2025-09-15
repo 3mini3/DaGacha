@@ -732,28 +732,28 @@
 
             // Slider dagashi data - Updated from assets/items.pdf
             const dagashiData = [
-                { name: "うまい棒", img: "https://placehold.co/120x120/E11D48/fff?text=うまい棒", category: "塩っぽい", price: 10 },
-                { name: "チロルチョコ", img: "https://placehold.co/120x120/8B4513/fff?text=チロル", category: "チョコ", price: 23 },
-                { name: "くっぴーラムネ", img: "https://placehold.co/120x120/87CEEB/333?text=ラムネ", category: "砂糖", price: 30 },
-                { name: "フエラムネ", img: "https://placehold.co/120x120/FFD700/333?text=フエラムネ", category: "砂糖", price: 70 },
-                { name: "ココアシガレット", img: "https://placehold.co/120x120/8B4513/fff?text=ココア", category: "チョコ", price: 20 },
-                { name: "ミニコーラ", img: "https://placehold.co/120x120/DC143C/fff?text=コーラ", category: "チョコ", price: 30 },
-                { name: "チョコバット", img: "https://placehold.co/120x120/654321/fff?text=バット", category: "砂糖", price: 50 },
-                { name: "きなこ棒", img: "https://placehold.co/120x120/DEB887/333?text=きなこ", category: "砂糖", price: 40 },
-                { name: "ボンタンアメ", img: "https://placehold.co/120x120/FFA500/333?text=ボンタン", category: "砂糖", price: 60 },
-                { name: "キャベツ太郎", img: "https://placehold.co/120x120/32CD32/333?text=キャベツ", category: "塩っぽい", price: 30 },
-                { name: "ベビースターラーメン", img: "https://placehold.co/120x120/FF6347/fff?text=ベビースター", category: "塩っぽい", price: 50 },
-                { name: "ビッグカツ", img: "https://placehold.co/120x120/D2691E/fff?text=カツ", category: "塩っぽい", price: 30 },
-                { name: "蒲焼さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=蒲焼", category: "塩っぽい", price: 30 },
-                { name: "どんどん焼き", img: "https://placehold.co/120x120/F4A460/333?text=焼き", category: "塩っぽい", price: 40 },
-                { name: "ふがし", img: "https://placehold.co/120x120/F5DEB3/333?text=ふがし", category: "塩っぽい", price: 20 },
-                { name: "黒棒", img: "https://placehold.co/120x120/2F4F4F/fff?text=黒棒", category: "塩っぽい", price: 30 },
-                { name: "玉葱さん太郎", img: "https://placehold.co/120x120/FFFF99/333?text=玉葱", category: "塩っぽい", price: 30 },
-                { name: "チーズあられ", img: "https://placehold.co/120x120/FFD700/333?text=チーズ", category: "塩っぽい", price: 50 },
-                { name: "ソースせんべい", img: "https://placehold.co/120x120/8B4513/fff?text=ソース", category: "塩っぽい", price: 40 },
-                { name: "タラタラしてんじゃね～よ", img: "https://placehold.co/120x120/FF4500/fff?text=タラタラ", category: "辛い", price: 80 },
-                { name: "焼肉さん太郎", img: "https://placehold.co/120x120/8B4513/fff?text=焼肉", category: "辛い", price: 30 },
-                { name: "酢だこさん太郎", img: "https://placehold.co/120x120/DC143C/fff?text=酢だこ", category: "辛い", price: 30 }
+                { name: "Umaibo", emoji: "🌽", category: "Savory" },
+                { name: "Tirol Choco", emoji: "🍫", category: "Chocolate" },
+                { name: "Kuppy Ramune", emoji: "🍬", category: "Sweet" },
+                { name: "Fue Ramune", emoji: "🎺", category: "Sweet" },
+                { name: "Cocoa Cigarette", emoji: "🚬", category: "Chocolate" },
+                { name: "Mini Cola", emoji: "🥤", category: "Chocolate" },
+                { name: "Choco Bat", emoji: "⚾", category: "Sweet" },
+                { name: "Kinako Bar", emoji: "🥜", category: "Sweet" },
+                { name: "Bontan Ame", emoji: "🍊", category: "Sweet" },
+                { name: "Cabbage Taro", emoji: "🥬", category: "Savory" },
+                { name: "Baby Star Ramen", emoji: "🍜", category: "Savory" },
+                { name: "Big Katsu", emoji: "🍗", category: "Savory" },
+                { name: "Kabayaki-san Taro", emoji: "🐟", category: "Savory" },
+                { name: "Dondon Yaki", emoji: "🍘", category: "Savory" },
+                { name: "Fugashi", emoji: "🌾", category: "Savory" },
+                { name: "Kuro Bo", emoji: "🍡", category: "Savory" },
+                { name: "Onion-san Taro", emoji: "🧅", category: "Savory" },
+                { name: "Cheese Arare", emoji: "🧀", category: "Savory" },
+                { name: "Sauce Senbei", emoji: "🍘", category: "Savory" },
+                { name: "Taratara Shitenja Ne-yo", emoji: "🐙", category: "Spicy" },
+                { name: "Yakiniku-san Taro", emoji: "🥩", category: "Spicy" },
+                { name: "Sudako-san Taro", emoji: "🐙", category: "Spicy" }
             ];
             let sliderIndex = 0;
             const sliderContent = document.getElementById('slider-content');
@@ -769,13 +769,22 @@
                 sliderContent.innerHTML = `
                     <div class="text-center">
                         <div class="relative inline-block mb-4">
-                            <img src="${d.img}" alt="${d.name}" class="rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 mx-auto">
+                            <div class="w-32 h-32 rounded-xl shadow-lg mx-auto flex items-center justify-center text-7xl hover:scale-105 transition-transform duration-300 cursor-pointer" style="background: linear-gradient(135deg, rgba(248, 187, 217, 0.1), rgba(255, 212, 204, 0.1));">
+                                ${d.emoji}
+                            </div>
                         </div>
-                        <span class="font-bold text-lg mb-2 block" style="color: var(--text-dark);">${d.name}</span>
+                        <span class="font-bold text-lg mb-2 block" style="color: var(--text-dark);">
+                            ${d.name === 'Umaibo' ? 
+                                `<a href="DagashiHistoryPages/Umaibo.html" class="hover:text-pink-500 transition-colors duration-200">${d.name}</a>` :
+                             d.name === 'Tirol Choco' ? 
+                                `<a href="DagashiHistoryPages/Tirol-choco.html" class="hover:text-pink-500 transition-colors duration-200">${d.name}</a>` :
+                                d.name
+                            }
+                        </span>
                         <span class="text-sm ${categoryColor} mb-4 block font-semibold">
                             <i class="fas fa-tag mr-1"></i>${d.category}
                         </span>
-                            <button class="add-dagashi-btn btn-primary px-6 py-2 text-sm" data-name="${d.name}" data-price="${d.price}">
+                            <button class="add-dagashi-btn btn-primary px-6 py-2 text-sm" data-name="${d.name}">
                                 <i class="fas fa-plus mr-2"></i>Add to Box
                             </button>
                     </div>
@@ -786,7 +795,7 @@
                     if (existingItem) {
                         existingItem.quantity++;
                     } else {
-                        dagashiList.push({ name: d.name, price: d.price, category: d.category, quantity: 1 });
+                        dagashiList.push({ name: d.name, category: d.category, quantity: 1, emoji: d.emoji });
                     }
                     renderDagashiList();
                     // Add visual feedback
@@ -822,19 +831,59 @@
                 if (dagashiList.length === 0) {
                     listElement.innerHTML = '<li class="text-gray-500 italic">No dagashi selected yet</li>';
                 } else {
-                    const totalPrice = dagashiList.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                     const totalQuantity = dagashiList.reduce((sum, item) => sum + item.quantity, 0);
                     const customizeFee = calculateCustomizeFee(totalQuantity);
-                    const totalCustomizeCost = totalPrice * 0.01 + customizeFee; // Convert yen to SGD roughly + fee
                     
-                    listElement.innerHTML = `<div class="mt-4 space-y-3">
-                        <div class="p-3 rounded-lg border-l-4" style="background: linear-gradient(135deg, rgba(248, 187, 217, 0.1), rgba(255, 212, 204, 0.1)); border-color: var(--primary-pink);">
-                            <div class="border-t pt-2 flex justify-between items-center">
-                                <span class="font-bold" style="color: var(--text-dark);">Total Customize Cost:</span>
-                                <span class="font-bold text-lg" style="color: var(--primary-pink);">$${totalCustomizeCost.toFixed(2)} SGD</span>
+                    listElement.innerHTML = dagashiList.map((item, index) => 
+                        `<div class="mb-4 pb-4 border-b last:border-b-0">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-lg flex-shrink-0 shadow-sm flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, rgba(248, 187, 217, 0.1), rgba(255, 212, 204, 0.1));">
+                                    ${item.emoji}
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="font-semibold text-lg" style="color: var(--text-dark);">${item.name}</p>
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs px-2 py-1 rounded-full" style="background: linear-gradient(135deg, rgba(248, 187, 217, 0.2), rgba(255, 212, 204, 0.2)); color: var(--text-dark);">${item.category}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="updateDagashiQuantity(${index}, -1)" class="w-7 h-7 rounded-full text-white text-sm flex items-center justify-center transition hover:scale-110" style="background: var(--primary-pink);">
+                                            <i class="fas fa-minus text-xs"></i>
+                                        </button>
+                                        <span class="font-bold text-lg min-w-[2rem] text-center" style="color: var(--text-dark);">${item.quantity}</span>
+                                        <button onclick="updateDagashiQuantity(${index}, 1)" class="w-7 h-7 rounded-full text-white text-sm flex items-center justify-center transition hover:scale-110" style="background: var(--secondary-mint);">
+                                            <i class="fas fa-plus text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="text-right flex-shrink-0">
+                                    <button onclick="removeDagashi(${index})" class="text-sm hover:underline transition" style="color: var(--primary-pink);">
+                                        <i class="fas fa-trash mr-1"></i>Remove
+                                    </button>
+                                </div>
                             </div>
-                            <p class="text-xs text-gray-600 mt-2">
-                                Fee: 0 items = $0, 1-10 items = $2, 11-20 items = $4, 21+ items = $6
+                        </div>`
+                    ).join('') + 
+                    `<div class="mt-6 space-y-3">
+                        <div class="p-4 rounded-lg border-l-4" style="background: linear-gradient(135deg, rgba(248, 187, 217, 0.1), rgba(255, 212, 204, 0.1)); border-color: var(--primary-pink);">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="text-center">
+                                    <p class="text-sm font-semibold" style="color: var(--text-soft);">Selected Items</p>
+                                    <p class="text-2xl font-bold" style="color: var(--primary-pink);">${totalQuantity}</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm font-semibold" style="color: var(--text-soft);">Random Items</p>
+                                    <p class="text-2xl font-bold" style="color: var(--secondary-mint);">${30 - totalQuantity}</p>
+                                </div>
+                            </div>
+                            <div class="border-t pt-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold" style="color: var(--text-dark);">Customize Fee (${totalQuantity} items):</span>
+                                    <span class="font-bold text-lg" style="color: var(--primary-pink);">$${customizeFee.toFixed(2)} SGD</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-3 text-center">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Box contains 30 items total • Fee: 0 items = $0, 1-10 items = $2, 11-20 items = $4, 21+ items = $6
                             </p>
                         </div>
                     </div>`;
