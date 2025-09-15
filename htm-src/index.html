@@ -522,7 +522,7 @@
                         <span class="font-bold" style="color: var(--text-dark);">Subtotal:</span>
                         <span id="cart-subtotal" class="font-bold text-2xl" style="color: var(--primary-pink);">$0.00</span>
                     </div>
-                    <button class="w-full btn-primary py-4 text-lg">
+                    <button id="checkout-btn" class="w-full btn-primary py-4 text-lg">
                         <i class="fas fa-credit-card mr-2"></i>
                         Proceed to Checkout
                     </button>
@@ -713,8 +713,21 @@
                 }
             });
 
-            if (addToCartBtn) {
-                addToCartBtn.addEventListener('click', addToCart);
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            function proceedToCheckout() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty. Please add some items before checkout.');
+                    return;
+                }
+
+                // Encode cart data and redirect to checkout page
+                const cartData = encodeURIComponent(JSON.stringify(cart));
+                window.location.href = `checkout.html?cart=${cartData}`;
+            }
+
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', proceedToCheckout);
             }
 
             // Slider dagashi data - Updated from assets/items.pdf
@@ -792,7 +805,7 @@
                 sliderIndex = (sliderIndex + 1) % dagashiData.length;
                 renderSlider();
             };
-            renderSlider();
+        renderSlider();
 
             // Dagashi list functionality
             let dagashiList = [];

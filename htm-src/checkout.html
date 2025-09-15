@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - DaGacha!</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=Klee+One:wght@400;600&family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #f8bbd9;
+            --secondary-mint: #a7e6d7;
+            --accent-peach: #ffd4cc;
+            --soft-purple: #e0c3fc;
+            --cream-white: #fef9f5;
+            --text-soft: #6b5b73;
+            --text-dark: #4a3c56;
+            --shadow-soft: 0 20px 25px -5px rgba(171, 126, 168, 0.15), 0 10px 10px -5px rgba(171, 126, 168, 0.08);
+            --shadow-cute: 0 8px 32px rgba(248, 187, 217, 0.3);
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', 'Klee One', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 20%, #e8f5e8 40%, #fff3e0 60%, #fce4ec 80%, #f8bbd9 100%);
+            background-attachment: fixed;
+            line-height: 1.7;
+            color: var(--text-soft);
+        }
+
+        .glass-morphism {
+            background: rgba(255, 245, 250, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(248, 187, 217, 0.3);
+            box-shadow: var(--shadow-cute);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-pink), var(--accent-peach));
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-cute);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(248, 187, 217, 0.5);
+            background: linear-gradient(45deg, var(--accent-peach), var(--secondary-mint));
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(248, 187, 217, 0.3);
+            border-radius: 15px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 0 3px rgba(248, 187, 217, 0.2);
+            outline: none;
+        }
+
+        .subscription-option {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(248, 187, 217, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .subscription-option:hover {
+            border-color: var(--primary-pink);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .subscription-option.selected {
+            border-color: var(--primary-pink);
+            background: linear-gradient(135deg, rgba(248, 187, 217, 0.1), rgba(255, 212, 204, 0.1));
+        }
+
+        .japanese-text {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="glass-morphism shadow-lg sticky top-0 z-40 border-b border-white/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="../assets/logo-simple.png" alt="DaGacha!" class="h-12 w-auto max-w-[200px] hover:scale-105 transition-transform duration-300">
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="font-bold border-b-2 border-current" style="color: var(--primary-pink);">Home</a>
+                <a href="history.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">History</a>
+                <a href="contact.html" class="font-semibold transition-all duration-300 hover:scale-105" style="color: var(--text-soft); hover: color: var(--primary-pink);">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-6" style="color: var(--text-dark);">
+                    <i class="fas fa-shopping-cart mr-4" style="color: var(--primary-pink);"></i>
+                    Checkout
+                </h1>
+                <div class="japanese-text">チェックアウト</div>
+                <p class="text-xl" style="color: var(--text-soft);">Complete your order and enjoy your Japanese snacks!</p>
+                <div class="japanese-text">注文を完了して、日本の駄菓子をお楽しみください！</div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Order Summary -->
+                <div class="glass-morphism rounded-3xl p-8">
+                    <h2 class="text-3xl font-bold mb-6" style="color: var(--text-dark);">
+                        <i class="fas fa-receipt mr-3" style="color: var(--primary-pink);"></i>
+                        Order Summary
+                    </h2>
+                    <div class="japanese-text mb-6">注文内容</div>
+
+                    <div id="order-items" class="space-y-4 mb-6">
+                        <!-- Order items will be populated by JavaScript -->
+                    </div>
+
+                    <div class="border-t border-white/30 pt-6">
+                        <div class="flex justify-between items-center text-xl font-bold mb-4">
+                            <span style="color: var(--text-dark);">Total:</span>
+                            <span id="order-total" style="color: var(--primary-pink);">$0.00</span>
+                        </div>
+                        <div class="japanese-text">合計</div>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="glass-morphism rounded-3xl p-8">
+                    <h2 class="text-3xl font-bold mb-6" style="color: var(--text-dark);">
+                        <i class="fas fa-user mr-3" style="color: var(--primary-pink);"></i>
+                        Customer Information
+                    </h2>
+                    <div class="japanese-text mb-6">お客様情報</div>
+
+                    <form id="checkout-form" class="space-y-6">
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                <i class="fas fa-envelope mr-2" style="color: var(--primary-pink);"></i>
+                                Email Address *
+                            </label>
+                            <div class="japanese-text mb-2">メールアドレス *</div>
+                            <input type="email" id="email" class="form-input w-full" placeholder="your@email.com" required>
+                        </div>
+
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                <i class="fas fa-user mr-2" style="color: var(--primary-pink);"></i>
+                                Full Name *
+                            </label>
+                            <div class="japanese-text mb-2">お名前 *</div>
+                            <input type="text" id="name" class="form-input w-full" placeholder="Your Full Name" required>
+                        </div>
+
+                        <!-- Address -->
+                        <div>
+                            <label class="block text-lg font-semibold mb-2" style="color: var(--text-dark);">
+                                <i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-pink);"></i>
+                                Shipping Address *
+                            </label>
+                            <div class="japanese-text mb-2">配送先住所 *</div>
+                            <textarea id="address" class="form-input w-full h-24 resize-none" placeholder="Street Address, City, State, ZIP Code, Country" required></textarea>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div>
+                            <label class="block text-lg font-semibold mb-4" style="color: var(--text-dark);">
+                                <i class="fas fa-credit-card mr-2" style="color: var(--primary-pink);"></i>
+                                Payment Method
+                            </label>
+                            <div class="japanese-text mb-4">決済方法</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button type="button" id="card-payment" class="subscription-option selected">
+                                    <i class="fas fa-credit-card text-2xl mb-2" style="color: var(--primary-pink);"></i>
+                                    <div class="font-semibold" style="color: var(--text-dark);">Credit Card</div>
+                                    <div class="japanese-text">クレジットカード</div>
+                                </button>
+                                <button type="button" id="paypal-payment" class="subscription-option">
+                                    <i class="fab fa-paypal text-2xl mb-2" style="color: var(--secondary-mint);"></i>
+                                    <div class="font-semibold" style="color: var(--text-dark);">PayPal</div>
+                                    <div class="japanese-text">ペイパル</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter Subscription -->
+                        <div class="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl border-2 border-pink-200">
+                            <div class="flex items-start space-x-4">
+                                <input type="checkbox" id="newsletter" class="mt-1 w-5 h-5 text-pink-600 rounded focus:ring-pink-500">
+                                <div>
+                                    <label for="newsletter" class="text-lg font-semibold cursor-pointer" style="color: var(--text-dark);">
+                                        <i class="fas fa-gift mr-2" style="color: var(--primary-pink);"></i>
+                                        Subscribe to Newsletter
+                                    </label>
+                                    <div class="japanese-text">ニュースレター購読</div>
+                                    <p class="text-sm mt-2" style="color: var(--text-soft);">
+                                        Get exclusive discounts and be the first to know about new Japanese snacks!
+                                        <br><strong style="color: var(--primary-pink);">You'll receive a 10% discount coupon for your next order!</strong>
+                                    </p>
+                                    <div class="japanese-text">
+                                        限定割引や新しい日本の駄菓子情報をいち早くゲット！
+                                        <br><strong style="color: var(--primary-pink);">次回注文で10%割引クーポンをプレゼント！</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subscription Plans -->
+                        <div>
+                            <label class="block text-lg font-semibold mb-4" style="color: var(--text-dark);">
+                                <i class="fas fa-calendar-alt mr-2" style="color: var(--primary-pink);"></i>
+                                Subscription Plans (Optional)
+                            </label>
+                            <div class="japanese-text mb-4">定期購読プラン（任意）</div>
+
+                            <div class="space-y-4">
+                                <div class="subscription-option" data-plan="none">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="font-semibold text-lg" style="color: var(--text-dark);">One-time Purchase</div>
+                                            <div class="japanese-text">単発購入</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">No recurring charges</div>
+                                            <div class="japanese-text">定期課金なし</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold" style="color: var(--primary-pink);">$0</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">additional</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="subscription-option" data-plan="monthly">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="font-semibold text-lg" style="color: var(--text-dark);">Monthly Subscription</div>
+                                            <div class="japanese-text">月額定期購読</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">Get a surprise box every month</div>
+                                            <div class="japanese-text">毎月サプライズボックスをお届け</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold" style="color: var(--primary-pink);">$22</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">per month</div>
+                                            <div class="japanese-text">月額</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="subscription-option" data-plan="6months">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="font-semibold text-lg" style="color: var(--text-dark);">6-Month Subscription</div>
+                                            <div class="japanese-text">6ヶ月定期購読</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">Save 10% with 6-month plan</div>
+                                            <div class="japanese-text">6ヶ月プランで10%お得</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold" style="color: var(--primary-pink);">$19.80</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">per month</div>
+                                            <div class="japanese-text">月額</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="subscription-option" data-plan="yearly">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="font-semibold text-lg" style="color: var(--text-dark);">Yearly Subscription</div>
+                                            <div class="japanese-text">年間定期購読</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">Save 20% with yearly plan</div>
+                                            <div class="japanese-text">年間プランで20%お得</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold" style="color: var(--primary-pink);">$17.60</div>
+                                            <div class="text-sm" style="color: var(--text-soft);">per month</div>
+                                            <div class="japanese-text">月額</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Place Order Button -->
+                        <button type="submit" class="w-full btn-primary py-4 text-xl">
+                            <i class="fas fa-shopping-bag mr-3"></i>
+                            Place Order
+                        </button>
+                        <div class="japanese-text text-center">注文する</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get cart data from localStorage or URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const cartData = urlParams.get('cart');
+
+            let cart = [];
+            if (cartData) {
+                try {
+                    cart = JSON.parse(decodeURIComponent(cartData));
+                } catch (e) {
+                    console.error('Failed to parse cart data:', e);
+                }
+            }
+
+            // Payment method selection
+            const paymentButtons = document.querySelectorAll('#card-payment, #paypal-payment');
+            paymentButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    paymentButtons.forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+                });
+            });
+
+            // Subscription plan selection
+            const subscriptionOptions = document.querySelectorAll('[data-plan]');
+            subscriptionOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    subscriptionOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                });
+            });
+
+            // Set default selections
+            document.querySelector('[data-plan="none"]').classList.add('selected');
+
+            // Render order summary
+            function renderOrderSummary() {
+                const orderItems = document.getElementById('order-items');
+                const orderTotal = document.getElementById('order-total');
+
+                if (cart.length === 0) {
+                    orderItems.innerHTML = '<p class="text-center text-gray-500">No items in cart</p>';
+                    orderTotal.textContent = '$0.00';
+                    return;
+                }
+
+                let total = 0;
+                orderItems.innerHTML = cart.map((item, index) => {
+                    const itemTotal = (item.finalPrice || item.price) * item.quantity;
+                    total += itemTotal;
+
+                    return `
+                        <div class="flex items-center justify-between p-4 bg-white/50 rounded-xl">
+                            <div class="flex items-center space-x-4">
+                                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                                <div>
+                                    <h3 class="font-semibold" style="color: var(--text-dark);">${item.name}</h3>
+                                    <p class="text-sm" style="color: var(--text-soft);">${item.quantity} × $${(item.finalPrice || item.price).toFixed(2)}</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-lg" style="color: var(--primary-pink);">$${itemTotal.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                orderTotal.textContent = `$${total.toFixed(2)}`;
+            }
+
+            // Form submission
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const formData = {
+                    email: document.getElementById('email').value,
+                    name: document.getElementById('name').value,
+                    address: document.getElementById('address').value,
+                    paymentMethod: document.querySelector('.subscription-option.selected[id*="payment"]').id.replace('-payment', ''),
+                    newsletter: document.getElementById('newsletter').checked,
+                    subscriptionPlan: document.querySelector('[data-plan].selected').dataset.plan,
+                    cart: cart,
+                    orderTotal: document.getElementById('order-total').textContent
+                };
+
+                // Here you would typically send the data to your backend
+                console.log('Order submitted:', formData);
+
+                // Show success message
+                alert('Thank you for your order! We will process it shortly.');
+                window.location.href = 'index.html';
+            });
+
+            renderOrderSummary();
+        });
+    </script>
+</body>
+</html>
