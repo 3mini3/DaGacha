@@ -357,13 +357,41 @@
                         <div>
                             <p class="text-xl mb-6 leading-relaxed" style="color: var(--text-soft);">The Gacha Box contains a delightful assortment of 30  Japanese dagashi snacks. Find your favorites and enjoy a taste of nostalgia!</p>
                             <ul class="space-y-3 mb-8" style="color: var(--text-soft);">
-                                <li class="flex items-center">
-                                    <i class="fas fa-heart mr-3" style="color: var(--primary-pink);"></i>
-                                    Price: <span class="font-bold text-2xl ml-2" style="color: var(--primary-pink);">$25.00</span>
+                                <li class="flex flex-col gap-4">
+                                    <div class="bg-white/60 rounded-lg p-4" style="border: 2px solid var(--primary-pink);">
+                                        <div class="flex items-center mb-2">
+                                            <i class="fas fa-calendar-alt mr-2" style="color: var(--primary-pink);"></i>
+                                            <span class="font-semibold" style="color: var(--text-dark);">Subscription Plan (6 months)</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-baseline">
+                                                <span class="font-bold text-3xl" style="color: var(--primary-pink);">S$25.00</span>
+                                                <span class="ml-1" style="color: var(--text-soft);">SGD</span>
+                                            </div>
+                                            <span class="bg-gradient-to-r from-pink-100 to-red-100 px-3 py-1 rounded-full text-sm font-semibold" style="color: var(--primary-pink);">Save S$5.00!</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white/40 rounded-lg p-4 border border-gray-200">
+                                        <div class="flex items-center mb-2">
+                                            <i class="fas fa-shopping-bag mr-2" style="color: var(--text-dark);"></i>
+                                            <span class="font-semibold" style="color: var(--text-dark);">Single Purchase</span>
+                                        </div>
+                                        <div class="flex items-baseline">
+                                            <span class="font-bold text-2xl" style="color: var(--text-dark);">S$30.00</span>
+                                            <span class="ml-1" style="color: var(--text-soft);">SGD</span>
+                                        </div>
+                                    </div>
                                 </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-sparkles mr-3" style="color: var(--accent-peach);"></i>
-                                    Includes: 30 Random Dagashi Snacks.<br>Delivering fee is included.
+                                <li class="flex flex-col gap-2 mt-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-sparkles mr-3" style="color: var(--accent-peach);"></i>
+                                        <div>
+                                            <p class="font-semibold" style="color: var(--text-dark);">Box Contents:</p>
+                                            <p style="color: var(--text-soft);">30 Random Dagashi Snacks</p>
+                                            <p class="text-sm" style="color: var(--text-soft);">✓ Delivery fee included</p>
+                                        </div>
+                                    </div>
+                                </li>
                                 </li>
                             </ul>
                         </div>
@@ -520,7 +548,7 @@
                 <div class="p-6 border-t border-white/20 bg-gradient-to-r from-white/10 to-white/5">
                     <div class="flex justify-between items-center mb-6 text-xl">
                         <span class="font-bold" style="color: var(--text-dark);">Subtotal:</span>
-                        <span id="cart-subtotal" class="font-bold text-2xl" style="color: var(--primary-pink);">$0.00</span>
+                        <span id="cart-subtotal" class="font-bold text-2xl" style="color: #e91e63;">S$0.00</span>
                     </div>
                     <button id="checkout-btn" class="w-full btn-primary py-4 text-lg">
                         <i class="fas fa-credit-card mr-2"></i>
@@ -615,61 +643,61 @@
                                 <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md flex-shrink-0">
                                 <div class="flex-grow">
                                     <p class="font-semibold text-lg" style="color: var(--text-dark);">${item.name}</p>
-                                    <p class="text-sm mb-2" style="color: var(--text-soft);">Base price: $${item.price.toFixed(2)}</p>
+                                    <p class="text-sm mb-2" style="color: var(--text-dark);">Base price: <span style="color: #e91e63;">$${item.price.toFixed(2)}</span></p>
                                     
                                     ${hasCustomization ? `
                                     <div class="bg-white/60 rounded-lg p-3 mb-3 border" style="border-color: var(--primary-pink);">
                                         <h4 class="font-semibold text-sm mb-2 flex items-center" style="color: var(--text-dark);">
-                                            <i class="fas fa-cog mr-2" style="color: var(--primary-pink);"></i>
+                                            <i class="fas fa-cog mr-2" style="color: #e91e63;"></i>
                                             Box Contents (30 items total):
                                         </h4>
                                         <div class="space-y-1 text-xs">
                                             <div class="flex justify-between">
-                                                <span style="color: var(--text-soft);">Selected items:</span>
-                                                <span class="font-semibold" style="color: var(--primary-pink);">${item.customization.totalCustomItems}</span>
+                                                <span style="color: var(--text-dark);">Selected items:</span>
+                                                <span class="font-semibold" style="color: #e91e63;">${item.customization.totalCustomItems}</span>
                                             </div>
                                             <div class="flex justify-between">
-                                                <span style="color: var(--text-soft);">Random items:</span>
-                                                <span class="font-semibold" style="color: var(--secondary-mint);">${item.customization.randomItems}</span>
+                                                <span style="color: var(--text-dark);">Random items:</span>
+                                                <span class="font-semibold" style="color: #00bfa5;">${item.customization.randomItems}</span>
                                             </div>
                                         </div>
                                         <div class="mt-2 pt-2 border-t border-gray-200">
                                             <p class="text-xs font-semibold mb-1" style="color: var(--text-dark);">Your Selected Items:</p>
                                             <div class="flex flex-wrap gap-1">
                                                 ${item.customization.selectedItems.map(custom => 
-                                                    `<span class="bg-gradient-to-r from-pink-100 to-purple-100 px-2 py-1 rounded-full text-xs" style="color: var(--text-dark);">
+                                                    `<span class="bg-gradient-to-r from-pink-50 to-purple-50 px-2 py-1 rounded-full text-xs border" style="color: var(--text-dark); border-color: var(--primary-pink);">
                                                         ${custom.name} (${custom.quantity})
                                                     </span>`
                                                 ).join('')}
                                             </div>
                                         </div>
                                         <div class="mt-2 pt-2 border-t border-gray-200 flex justify-between items-center">
-                                            <span class="text-xs font-semibold" style="color: var(--text-soft);">Customize Fee:</span>
-                                            <span class="text-xs font-bold" style="color: var(--secondary-mint);">+$${item.customization.customizeFee.toFixed(2)}</span>
+                                            <span class="text-xs font-semibold" style="color: var(--text-dark);">Customize Fee:</span>
+                                            <span class="text-xs font-bold" style="color: #e91e63;">+$${item.customization.customizeFee.toFixed(2)}</span>
                                         </div>
                                     </div>
                                     ` : `
                                     <div class="bg-white/60 rounded-lg p-3 mb-3 border border-gray-200">
-                                        <p class="text-sm" style="color: var(--text-soft);">
-                                            <i class="fas fa-dice mr-2" style="color: var(--secondary-mint);"></i>
+                                        <p class="text-sm" style="color: var(--text-dark);">
+                                            <i class="fas fa-dice mr-2" style="color: #e91e63;"></i>
                                             Standard Random Box (30 random dagashi items)
                                         </p>
                                     </div>
                                     `}
                                     
                                     <div class="flex items-center mt-3">
-                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: var(--primary-pink);" onclick="updateQuantity(${index}, -1)">
+                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: #e91e63;" onclick="updateQuantity(${index}, -1)">
                                             <i class="fas fa-minus text-xs"></i>
                                         </button>
                                         <span class="px-4 font-bold text-lg" style="color: var(--text-dark);">${item.quantity}</span>
-                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: var(--secondary-mint);" onclick="updateQuantity(${index}, 1)">
+                                        <button class="w-8 h-8 rounded-full text-white flex items-center justify-center transition hover:scale-110" style="background: #00bfa5;" onclick="updateQuantity(${index}, 1)">
                                             <i class="fas fa-plus text-xs"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="text-right flex-shrink-0">
-                                    <p class="font-bold text-xl mb-2" style="color: var(--primary-pink);">$${(item.finalPrice * item.quantity).toFixed(2)}</p>
-                                    <button class="text-sm hover:underline transition" style="color: var(--primary-pink);" onclick="removeFromCart(${index})">
+                                    <p class="font-bold text-xl mb-2" style="color: #e91e63;">$${(item.finalPrice * item.quantity).toFixed(2)}</p>
+                                    <button class="text-sm hover:underline transition" style="color: #e91e63;" onclick="removeFromCart(${index})">
                                         <i class="fas fa-trash mr-1"></i>Remove
                                     </button>
                                 </div>
@@ -887,8 +915,11 @@
                             </div>
                             <p class="text-xs text-gray-600 mt-3 text-center">
                                 <i class="fas fa-info-circle mr-1"></i>
-                                Box contains 30 items total • Fee: 0 items = $0, 1-10 items = $2, 11-20 items = $4, 21+ items = $6
+                                Box contains 30 items total • Fee: 0 items = S$0, 1-10 items = S$2, 11-20 items = S$4, 21+ items = S
+                                S$6
                             </p>
+
+
                         </div>
                     </div>`;
                 }
